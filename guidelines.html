@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Board Games Guidelines</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .game-selector {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .game-button {
+      padding: 15px 30px;
+      background: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .game-button.active {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .game-content {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .game-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 20px;
+    }
+
+    .game-title {
+      font-size: 2.5em;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .game-description {
+      font-size: 1.1em;
+      color: #666;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.8em;
+      color: #667eea;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-title:hover {
+      background-color: #f0f0f0;
+    }
+
+    .section-title::before {
+      content: "▼";
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .section-title.collapsed::before {
+      transform: rotate(-90deg);
+    }
+
+    .section-content {
+      margin-left: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .section-content.collapsed {
+      display: none;
+    }
+
+    .subsection {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      border-radius: 8px;
+    }
+
+    .subsection-title {
+      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .card-name {
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 8px;
+    }
+
+    .scenario-box {
+      background: #e8f4f8;
+      border: 1px solid #b3d9e8;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+    .scenario-title {
+      font-weight: bold;
+      color: #2c5aa0;
+      margin-bottom: 10px;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+
+    .warning {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+
+    .quick-reference {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      display: none;
+    }
+
+    .quick-reference.show {
+      display: block;
+    }
+
+    .quick-ref-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #667eea;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-box:focus {
+      border-color: #667eea;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .game-button {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+
+      .quick-reference {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 20px;
+        max-width: 100%;
+      }
+    }
+
+    .tab-navigation {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab-button:hover {
+      background: #f0f0f0;
+    }
+
+    .tab-button.active {
+      border-bottom-color: #667eea;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>🎲 Interactive Board Games Guidelines</h1>
+      <p class="subtitle">Comprehensive rules and scenarios for Unstable Unicorns, Monopoly Deal, and Exploding Kittens
+      </p>
+    </header>
+
+    <input type="text" class="search-box" placeholder="Search rules, cards, or scenarios..." id="searchBox">
+
+    <div class="game-selector">
+      <button class="game-button active" data-game="unstable-unicorns">🦄 Unstable Unicorns</button>
+      <button class="game-button" data-game="monopoly-deal">💰 Monopoly Deal</button>
+      <button class="game-button" data-game="exploding-kittens">💥 Exploding Kittens</button>
+    </div>
+
+    <!-- Quick Reference Panel -->
+    <div class="quick-reference" id="quickRef">
+      <div class="quick-ref-title">Quick Reference</div>
+      <div id="quickRefContent"></div>
+    </div>
+
+    <!-- Unstable Unicorns Content -->
+    <div class="game-content active" id="unstable-unicorns">
+      <div class="game-header">
+        <h2 class="game-title">🦄 Unstable Unicorns</h2>
+        <p class="game-description">A strategic card game for 2-8 players where you build a unicorn army while
+          sabotaging your opponents.</p>
+      </div>
+
+      <div class="tab-navigation">
+        <button class="tab-button active" data-tab="uu-setup">Game Setup</button>
+        <button class="tab-button" data-tab="uu-gameplay">Gameplay</button>
+        <button class="tab-button" data-tab="uu-cards">Card Types</button>
+        <button class="tab-button" data-tab="uu-scenarios">Scenarios</button>
+        <button class="tab-button" data-tab="uu-faq">FAQ</button>
+      </div>
+
+      <div class="tab-content active" id="uu-setup">
+        <div class="section">
+          <h3 class="section-title">🎯 Game Setup</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Initial Setup</h4>
+              <p><strong>Players:</strong> 2-8 players</p>
+              <p><strong>Ages:</strong> 12+</p>
+              <p><strong>Game Time:</strong> 30-45 minutes</p>
+
+              <h5>Official Setup Steps:</h5>
+              <ol>
+                <li>Gather all Baby Unicorns from the deck and place 1 in each player's Stable</li>
+                <li>Place the rest of the Baby Unicorns in a stack - this becomes your <strong>Nursery</strong></li>
+                <li>Shuffle the remaining cards and deal 5 to each player</li>
+                <li>The rest of the stack becomes your <strong>Draw Pile</strong></li>
+                <li>Starting player: Whoever is wearing the most colors (most unicorn-y!)</li>
+              </ol>
+
+              <div class="subsection">
+                <h4 class="subsection-title">Table Setup Diagram</h4>
+                <img src="https://unstablegameswiki.com/images/thumb/e/e6/Tablesetup.png/450px-Tablesetup.png" srcset="https://unstablegameswiki.com/images/e/e6/Tablesetup.png 1.5x" alt="Unstable Unicorns Table Setup"
+                  style="max-width: 100%; height: auto; border: 2px solid #667eea; border-radius: 8px; margin: 15px 0;">
+                <p><em>Official table setup from <a
+                      href="https://unstablegameswiki.com/index.php?title=Unstable_Unicorns_-_General_Player_Rules"
+                      target="_blank">Unstable Games Wiki</a></em></p>
+              </div>
+
+              <div class="highlight">
+                <strong>Win Conditions (Official):</strong><br>
+                • 2 players: 7 Unicorns to win<br>
+                • 3-5 players: 7 Unicorns to win<br>
+                • 6-8 players: 6 Unicorns to win
+              </div>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Player Areas</h4>
+              <p><strong>Hand:</strong> Cards you can play (keep secret, max 7 at end of turn)</p>
+              <p><strong>Stable:</strong> Your Unicorn collection (visible to all)</p>
+              <p><strong>Nursery:</strong> Extra Baby Unicorn cards (shared by all players)</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">What if you run out of cards?</h4>
+              <p>According to official rules:</p>
+              <ul>
+                <li><strong>Stickler Option:</strong> Game ends when Draw Pile is empty. If no one has won, nobody wins.
+                </li>
+                <li><strong>Rule-breaker Option:</strong> Reshuffle the discard pile back into the deck (though rules
+                  say not to, you rebel!)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="uu-gameplay">
+        <div class="section">
+          <h3 class="section-title">🎮 Turn Structure</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Official Turn Phases (4 Phases)</h4>
+              <p>Turns go clockwise around the table, and each turn has 4 phases:</p>
+              <ol>
+                <li><strong>Beginning of Your Turn</strong>
+                  <ul>
+                    <li>If any of your cards has an effect that happens at the beginning of your turn, you may use that
+                      effect now</li>
+                    <li>⚠️ If you forget to do it before you draw, you miss out on using that effect</li>
+                  </ul>
+                </li>
+                <li><strong>Draw Phase</strong>
+                  <ul>
+                    <li>Draw 1 card from the Draw Pile</li>
+                  </ul>
+                </li>
+                <li><strong>Action Phase</strong>
+                  <ul>
+                    <li>Play 1 card from your hand OR Draw 1 more card from the Draw Pile</li>
+                    <li>Instant cards can be played anytime (even during other players' turns)</li>
+                  </ul>
+                </li>
+                <li><strong>End of Your Turn</strong>
+                  <ul>
+                    <li>Discard down to the hand limit (7 cards maximum)</li>
+                    <li>If you're holding fewer than 7, don't get greedy and draw more - patience is a virtue!</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Card Resolution Order</h4>
+              <p>When multiple effects trigger simultaneously:</p>
+              <ol>
+                <li>Active player resolves their effects first</li>
+                <li>Other players resolve in clockwise order</li>
+                <li>Players choose the order of their own effects</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="uu-cards">
+        <div class="section">
+          <h3 class="section-title">🃏 Card Types</h3>
+          <div class="section-content">
+            <div class="card-list">
+              <div class="card">
+                <div class="card-name">🦄 Baby Unicorns</div>
+                <p><strong>Official Description:</strong> Each player starts with a Baby Unicorn in their Stable. You
+                  can only summon more by using special cards!</p>
+                <p><strong>Effect:</strong> Count toward victory, cannot be destroyed</p>
+                <p><strong>Special Note:</strong> If you run out of Baby Unicorn cards, use spare change, gum wrappers,
+                  or lint to represent additional babies!</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🌟 Basic Unicorns</div>
+                <p><strong>Official Description:</strong> Play a Basic Unicorn by placing it in your Stable during your
+                  turn. They don't have powers, but they are still special!</p>
+                <p><strong>Effect:</strong> Count toward victory but have no special abilities</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">✨ Magical Unicorns</div>
+                <p><strong>Official Description:</strong> Play a Magical Unicorn Card by placing it in your Stable
+                  during your turn. Each one comes with a special power!</p>
+                <p><strong>Effect:</strong> Continuous effects while in Stable</p>
+                <p><strong>Examples:</strong> Extra draws, protection, bonuses</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">⚡ Instant Cards</div>
+                <p><strong>Official Description:</strong> Play an Instant Card at any time to stop someone from playing
+                  a card. Send the Instant Card to the Discard Pile after use.</p>
+                <p><strong>When to play:</strong> Anytime, even during other players' turns</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔥 Magic Cards</div>
+                <p><strong>Official Description:</strong> Play a Magic Card during your turn to create mayhem. Send the
+                  Magic Card to the Discard Pile after use.</p>
+                <p><strong>When to play:</strong> During your Action Phase only</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">⬆️ Upgrade Cards</div>
+                <p><strong>Official Description:</strong> Play an Upgrade Card during your turn to give someone's Stable
+                  a positive effect. (Your own Stable is always a good choice!)</p>
+                <p><strong>Effect:</strong> Persistent positive effects until removed</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">⬇️ Downgrade Cards</div>
+                <p><strong>Official Description:</strong> Play a Downgrade Card during your turn to give someone's
+                  Stable a negative effect. (Pick an opponent's Stable, duh!)</p>
+                <p><strong>Effect:</strong> Persistent negative effects until removed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="uu-scenarios">
+        <div class="section">
+          <h3 class="section-title">📋 Common Scenarios</h3>
+          <div class="section-content">
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 1: Multiple Effects Trigger</div>
+              <p><strong>Situation:</strong> You play a card that triggers multiple "when you play" effects.</p>
+              <p><strong>Resolution:</strong> Choose the order of your effects, resolve them one at a time.</p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 2: Neigh Card Timing</div>
+              <p><strong>Situation:</strong> Player A plays a card, Player B plays Neigh, Player C wants to Neigh the
+                Neigh.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Player A's card is "pending"</li>
+                <li>Player B plays Neigh (targeting original card)</li>
+                <li>Player C can Neigh Player B's Neigh</li>
+                <li>Resolve in reverse order (most recent first)</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 3: Unicorn Theft vs. Protection</div>
+              <p><strong>Situation:</strong> You try to steal a Unicorn that has protection.</p>
+              <p><strong>Resolution:</strong> Protection abilities prevent targeting. The theft fails.</p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 4: Winning with Effects</div>
+              <p><strong>Situation:</strong> You have 6 Unicorns and play a card that brings a Unicorn to your Stable.
+              </p>
+              <p><strong>Resolution:</strong> You win immediately when you reach 7 Unicorns, even mid-effect.</p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 5: Hand Limit Interaction</div>
+              <p><strong>Situation:</strong> End of turn, you have 8 cards and must discard.</p>
+              <p><strong>Resolution:</strong> Choose which card to discard. Discard effects may trigger.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="uu-faq">
+        <div class="section">
+          <h3 class="section-title">❓ Official FAQ</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Hand Limit Rules</h4>
+              <p><strong>Official Rule:</strong> If you're holding more than 7 cards at the end of your turn, discard
+                down to 7. If you're holding fewer than 7, don't get greedy and draw more. Patience is a virtue.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">When cards say "each player"</h4>
+              <p><strong>Official Rule:</strong> When the card says "each player" that includes you, too.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Running out of Baby Unicorns</h4>
+              <p><strong>Official Rule:</strong> If you run out of Baby Unicorn cards at any point, root through your
+                pockets for spare change, gum wrappers, or lint to represent additional babies.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Pandamonium Effect</h4>
+              <p><strong>Official Rule:</strong> When Pandamonium is in play, all of that player's Unicorns are Pandas,
+                but their effects remain the same.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">What happens if the Draw Pile runs out?</h4>
+              <p><strong>Official Options:</strong></p>
+              <ul>
+                <li><strong>Stickler:</strong> Game ends. If no one completed their Unicorn Army, no one wins.</li>
+                <li><strong>Rule-breaker:</strong> Reshuffle the discard pile back into the deck (though rules say not
+                  to).</li>
+              </ul>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Can I Neigh my own cards?</h4>
+              <p>No, you cannot Neigh your own cards. Neigh cards can only target other players' cards.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Do Upgrades and Downgrades count toward victory?</h4>
+              <p>No, only Unicorn cards count toward victory. Upgrades and Downgrades do not count.</p>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Can I choose not to use a mandatory effect?</h4>
+              <p>No, mandatory effects (must, have to, etc.) cannot be ignored. Optional effects use "may" language.</p>
+            </div>
+
+            <div class="highlight">
+              <p><strong>Reference:</strong> Official rules from <a
+                  href="https://unstablegameswiki.com/index.php?title=Unstable_Unicorns_-_General_Player_Rules"
+                  target="_blank">Unstable Games Wiki</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monopoly Deal Content -->
+    <div class="game-content" id="monopoly-deal">
+      <div class="game-header">
+        <h2 class="game-title">💰 Monopoly Deal</h2>
+        <p class="game-description">Fast-paced card game where you collect property sets and charge rent while avoiding
+          debt!</p>
+      </div>
+
+      <div class="tab-navigation">
+        <button class="tab-button active" data-tab="md-setup">Game Setup</button>
+        <button class="tab-button" data-tab="md-gameplay">Gameplay</button>
+        <button class="tab-button" data-tab="md-cards">Card Types</button>
+        <button class="tab-button" data-tab="md-scenarios">Scenarios</button>
+        <button class="tab-button" data-tab="md-properties">Properties</button>
+      </div>
+
+      <div class="tab-content active" id="md-setup">
+        <div class="section">
+          <h3 class="section-title">🎯 Game Setup</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Initial Setup</h4>
+              <p><strong>Players:</strong> 2-5 players</p>
+              <p><strong>Ages:</strong> 8+</p>
+              <p><strong>Game Time:</strong> 15-20 minutes</p>
+
+              <h5>Setup Steps:</h5>
+              <ol>
+                <li>Shuffle all 110 cards</li>
+                <li>Deal 5 cards to each player</li>
+                <li>Place remaining cards as Draw Pile</li>
+                <li>Players arrange their areas: Hand, Bank, Properties</li>
+                <li>Youngest player goes first</li>
+              </ol>
+
+              <div class="highlight">
+                <strong>Win Condition:</strong> First player to collect 3 complete property color groups wins!
+              </div>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Player Areas</h4>
+              <p><strong>Hand:</strong> Cards you can play (keep secret)</p>
+              <p><strong>Bank:</strong> Money cards (face up, cannot be stolen)</p>
+              <p><strong>Properties:</strong> Property cards organized by color (face up)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="md-gameplay">
+        <div class="section">
+          <h3 class="section-title">🎮 Turn Structure</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Turn Phases</h4>
+              <ol>
+                <li><strong>Draw 2 Cards</strong> from the Draw Pile</li>
+                <li><strong>Play up to 3 Action Cards</strong>
+                  <ul>
+                    <li>Property cards</li>
+                    <li>Money cards (to Bank)</li>
+                    <li>Action cards</li>
+                    <li>Property Wild cards</li>
+                  </ul>
+                </li>
+                <li><strong>Discard excess cards</strong> (hand limit: 7 cards) - excess cards go to discard pile</li>
+              </ol>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Important Rules</h4>
+              <ul>
+                <li>You MUST draw 2 cards at start of turn (even if deck runs out)</li>
+                <li>You can play 0-3 cards per turn</li>
+                <li>Property Wild cards can be moved between color groups on your turn</li>
+                <li>Money in Bank cannot be taken by other players</li>
+                <li>All cards have a money value printed on them</li>
+                <li><strong>Empty Hand Rule:</strong> If you have 0 cards, you still draw 2 cards (not up to 2)</li>
+                <li><strong>Draw Pile Empty:</strong> When draw pile is empty, shuffle discard pile to make new draw
+                  pile</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="md-cards">
+        <div class="section">
+          <h3 class="section-title">🃏 Card Types</h3>
+          <div class="section-content">
+            <div class="card-list">
+              <div class="card">
+                <div class="card-name">🏠 Property Cards</div>
+                <p><strong>Purpose:</strong> Build complete color sets to win</p>
+                <p><strong>Rent:</strong> Charge other players when you have sets</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💵 Money Cards</div>
+                <p><strong>Values:</strong> $1M, $2M, $3M, $4M, $5M, $10M</p>
+                <p><strong>Safety:</strong> Cannot be stolen once in Bank</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🌈 Property Wild Cards</div>
+                <p><strong>Flexibility:</strong> Can be any color shown on card</p>
+                <p><strong>Movement:</strong> Can be moved between your color groups</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💰 Rent Cards</div>
+                <p><strong>Effect:</strong> Charge rent to specific players</p>
+                <p><strong>Amount:</strong> Based on number of properties in set</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🎂 Birthday/Christmas</div>
+                <p><strong>Effect:</strong> All other players give you $2M</p>
+                <p><strong>Source:</strong> From their Bank or properties</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💳 Debt Collector</div>
+                <p><strong>Effect:</strong> Choose one player to pay you $5M</p>
+                <p><strong>Targeting:</strong> Single opponent</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🏦 Forced Deal</div>
+                <p><strong>Effect:</strong> Swap any property with another player</p>
+                <p><strong>Restriction:</strong> Cannot break complete sets</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔄 Sly Deal</div>
+                <p><strong>Effect:</strong> Steal any property from another player</p>
+                <p><strong>Restriction:</strong> Cannot steal from complete sets</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💎 Double the Rent</div>
+                <p><strong>Effect:</strong> Play with a rent card to double the rent amount</p>
+                <p><strong>Usage:</strong> Must be played together with a rent action card</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💀 Deal Breaker</div>
+                <p><strong>Effect:</strong> Steal an entire complete property set from another player</p>
+                <p><strong>Power:</strong> Can take complete sets (unlike Sly Deal/Forced Deal)</p>
+                <p><strong>Restriction:</strong> Only works on complete property color groups</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">❌ Just Say No</div>
+                <p><strong>Effect:</strong> Cancel any action against you</p>
+                <p><strong>Timing:</strong> Immediate response to being targeted</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="md-scenarios">
+        <div class="section">
+          <h3 class="section-title">📋 Common Scenarios</h3>
+          <div class="section-content">
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 1: Insufficient Payment</div>
+              <p><strong>Situation:</strong> You must pay $4M rent but only have $2M total value in Bank and properties
+                combined.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Pay all money from Bank first</li>
+                <li>Give ALL remaining properties (even if total value is less than owed)</li>
+                <li>You choose which properties to give</li>
+                <li><strong>No credit/debt system:</strong> You don't owe anything more in future turns</li>
+                <li><strong>No change given:</strong> Overpayment is acceptable</li>
+              </ol>
+              </p>
+              <div class="warning">
+                <strong>Key Rule:</strong> Players pay what they can. No debt carries over to future turns.
+              </div>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 1b: Standard Rent Payment</div>
+              <p><strong>Situation:</strong> You must pay $4M rent and have $2M in Bank plus properties.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Pay all money from Bank first ($2M)</li>
+                <li>Give properties worth remaining amount ($2M)</li>
+                <li>You choose which properties to give</li>
+                <li>Overpayment is acceptable (no change given)</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 2: Deal Breaker Usage</div>
+              <p><strong>Situation:</strong> You want to use Deal Breaker to steal a complete property set.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Target must be a COMPLETE property color group</li>
+                <li>You steal the ENTIRE set (all properties + any attached cards)</li>
+                <li>Can be blocked by Just Say No</li>
+                <li>Cannot target incomplete sets</li>
+              </ol>
+              </p>
+              <div class="highlight">
+                <strong>Power Move:</strong> Deal Breaker is the only way to steal complete property sets!
+              </div>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 3: Just Say No Chain</div>
+              <p><strong>Situation:</strong> Player A plays Sly Deal, Player B plays Just Say No, Player A plays another
+                Just Say No.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Player A's second Just Say No cancels Player B's Just Say No</li>
+                <li>Original Sly Deal takes effect</li>
+                <li>Player B can play another Just Say No if they have one</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 3: Excess Cards at End of Turn</div>
+              <p><strong>Situation:</strong> You end your turn with 8 cards (over the 7-card limit).</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Choose 1 card to discard</li>
+                <li>Place discarded card in the DISCARD PILE (face up)</li>
+                <li>You choose which card to discard</li>
+                <li>Discarded cards go to discard pile, NOT back to draw pile</li>
+              </ol>
+              </p>
+              <div class="warning">
+                <strong>Important:</strong> All discarded cards go to the discard pile, never to the draw pile.
+              </div>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 4: Property Wild Card Movement</div>
+              <p><strong>Situation:</strong> You have a Green/Blue Wild card in your Green set and want to move it to
+                Blue.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>You can move it on your turn as a free action</li>
+                <li>This doesn't count toward your 3-card play limit</li>
+                <li>You can move multiple Wild cards per turn</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 5: Forced Deal Restrictions</div>
+              <p><strong>Situation:</strong> You want to use Forced Deal to swap a property from a complete set.</p>
+              <p><strong>Resolution:</strong> This is not allowed. Forced Deal cannot target properties in complete
+                sets.</p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 6: Double the Rent + Just Say No</div>
+              <p><strong>Situation:</strong> Player A plays "Double the Rent" then plays a Rent action card. Player B
+                plays "Just Say No."</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Just Say No cancels the ENTIRE rent action (including the double effect)</li>
+                <li>Player A gets no rent payment</li>
+                <li>Both "Double the Rent" and "Rent" cards go to discard pile</li>
+                <li>Just Say No goes to discard pile</li>
+              </ol>
+              </p>
+              <div class="warning">
+                <strong>Key Rule:</strong> Just Say No cancels the complete action, not just part of it.
+              </div>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 7: Empty Draw Pile</div>
+              <p><strong>Situation:</strong> You need to draw cards but the draw pile is empty.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Immediately shuffle the entire discard pile</li>
+                <li>Place shuffled cards face-down as new draw pile</li>
+                <li>Continue drawing the required number of cards</li>
+                <li>If both draw pile AND discard pile are empty, skip drawing</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 8: Winning Mid-Turn</div>
+              <p><strong>Situation:</strong> You get your 3rd complete set during your turn.</p>
+              <p><strong>Resolution:</strong> You win immediately, even if you haven't used all 3 actions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="md-properties">
+        <div class="section">
+          <h3 class="section-title">🏠 Property Sets & Rent</h3>
+          <div class="section-content">
+            <div class="card-list">
+              <div class="card">
+                <div class="card-name">🟤 Brown Set (2 properties)</div>
+                <p><strong>Properties:</strong> Mediterranean Ave, Baltic Ave</p>
+                <p><strong>Rent:</strong> 1 property = $1M, 2 properties = $2M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔵 Light Blue Set (3 properties)</div>
+                <p><strong>Properties:</strong> Oriental Ave, Vermont Ave, Connecticut Ave</p>
+                <p><strong>Rent:</strong> 1 = $1M, 2 = $2M, 3 = $3M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🟣 Purple Set (3 properties)</div>
+                <p><strong>Properties:</strong> St. Charles Place, States Ave, Virginia Ave</p>
+                <p><strong>Rent:</strong> 1 = $1M, 2 = $2M, 3 = $4M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🟠 Orange Set (3 properties)</div>
+                <p><strong>Properties:</strong> St. James Place, Tennessee Ave, New York Ave</p>
+                <p><strong>Rent:</strong> 1 = $1M, 2 = $3M, 3 = $5M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔴 Red Set (3 properties)</div>
+                <p><strong>Properties:</strong> Kentucky Ave, Indiana Ave, Illinois Ave</p>
+                <p><strong>Rent:</strong> 1 = $2M, 2 = $3M, 3 = $6M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🟡 Yellow Set (3 properties)</div>
+                <p><strong>Properties:</strong> Atlantic Ave, Ventnor Ave, Marvin Gardens</p>
+                <p><strong>Rent:</strong> 1 = $2M, 2 = $4M, 3 = $6M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🟢 Green Set (3 properties)</div>
+                <p><strong>Properties:</strong> Pacific Ave, No. Carolina Ave, Pennsylvania Ave</p>
+                <p><strong>Rent:</strong> 1 = $2M, 2 = $4M, 3 = $7M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔵 Dark Blue Set (2 properties)</div>
+                <p><strong>Properties:</strong> Park Place, Boardwalk</p>
+                <p><strong>Rent:</strong> 1 = $3M, 2 = $8M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🚂 Railroad Set (4 properties)</div>
+                <p><strong>Properties:</strong> All 4 Railroads</p>
+                <p><strong>Rent:</strong> 1 = $1M, 2 = $2M, 3 = $3M, 4 = $4M</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">💡 Utility Set (2 properties)</div>
+                <p><strong>Properties:</strong> Electric Company, Water Works</p>
+                <p><strong>Rent:</strong> 1 = $1M, 2 = $2M</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exploding Kittens Content -->
+    <div class="game-content" id="exploding-kittens">
+      <div class="game-header">
+        <h2 class="game-title">💥 Exploding Kittens</h2>
+        <p class="game-description">A strategic, kitty-powered version of Russian Roulette. Avoid exploding and be the
+          last player standing!</p>
+      </div>
+
+      <div class="tab-navigation">
+        <button class="tab-button active" data-tab="ek-setup">Game Setup</button>
+        <button class="tab-button" data-tab="ek-gameplay">Gameplay</button>
+        <button class="tab-button" data-tab="ek-cards">Card Types</button>
+        <button class="tab-button" data-tab="ek-scenarios">Scenarios</button>
+        <button class="tab-button" data-tab="ek-strategy">Strategy</button>
+      </div>
+
+      <div class="tab-content active" id="ek-setup">
+        <div class="section">
+          <h3 class="section-title">🎯 Game Setup</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Initial Setup</h4>
+              <p><strong>Players:</strong> 2-5 players</p>
+              <p><strong>Ages:</strong> 7+</p>
+              <p><strong>Game Time:</strong> 15 minutes</p>
+
+              <h5>Setup Steps:</h5>
+              <ol>
+                <li>Remove all Exploding Kittens (💥) and Defuse cards (🛡️) from deck</li>
+                <li>Give each player 1 Defuse card</li>
+                <li>Shuffle remaining cards and deal 4 to each player (7 cards total with Defuse)</li>
+                <li>Add back Exploding Kittens: (Players - 1) Exploding Kittens</li>
+                <li>Add back remaining Defuse cards to deck</li>
+                <li>Shuffle and place as Draw Pile</li>
+              </ol>
+
+              <div class="highlight">
+                <strong>Win Condition:</strong> Be the last player remaining (don't explode)!
+              </div>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Card Distribution (5 Players)</h4>
+              <ul>
+                <li><strong>Exploding Kittens:</strong> 4 in deck</li>
+                <li><strong>Defuse Cards:</strong> 1 per player + 2 extras in deck</li>
+                <li><strong>Other Cards:</strong> Distributed equally</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ek-gameplay">
+        <div class="section">
+          <h3 class="section-title">🎮 Turn Structure</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Turn Sequence</h4>
+              <ol>
+                <li><strong>Play cards</strong> (optional) - Play as many as you want</li>
+                <li><strong>Draw a card</strong> (mandatory) - End your turn by drawing</li>
+                <li>If you draw an Exploding Kitten:
+                  <ul>
+                    <li>Use a Defuse card to survive</li>
+                    <li>Put Exploding Kitten back in deck wherever you choose</li>
+                    <li>OR explode and are eliminated</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Key Rules</h4>
+              <ul>
+                <li>You can play cards before drawing</li>
+                <li>You can play cards in response to other cards</li>
+                <li>Some cards can be played out of turn</li>
+                <li>Always end your turn by drawing a card</li>
+                <li>No hand limit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ek-cards">
+        <div class="section">
+          <h3 class="section-title">🃏 Card Types</h3>
+          <div class="section-content">
+            <div class="card-list">
+              <div class="card">
+                <div class="card-name">💥 Exploding Kitten</div>
+                <p><strong>Effect:</strong> You explode and are eliminated (unless you Defuse)</p>
+                <p><strong>Defusing:</strong> Play Defuse card, put Exploding Kitten back in deck</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🛡️ Defuse</div>
+                <p><strong>Effect:</strong> Prevents explosion, allows you to put Exploding Kitten back</p>
+                <p><strong>Timing:</strong> Play immediately when you draw Exploding Kitten</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">❌ Nope</div>
+                <p><strong>Effect:</strong> Stop any action (except Exploding Kittens and Defuse)</p>
+                <p><strong>Timing:</strong> Can be played out of turn to stop actions</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">👀 See the Future</div>
+                <p><strong>Effect:</strong> Secretly view the top 3 cards of the deck</p>
+                <p><strong>Info:</strong> You see the order but don't rearrange them</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🔀 Shuffle</div>
+                <p><strong>Effect:</strong> Shuffle the draw pile</p>
+                <p><strong>Strategy:</strong> Use when you know bad cards are on top</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">⏭️ Skip</div>
+                <p><strong>Effect:</strong> End your turn without drawing</p>
+                <p><strong>Safety:</strong> Avoid drawing when deck is dangerous</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">👥 Attack</div>
+                <p><strong>Effect:</strong> End your turn, next player takes 2 turns</p>
+                <p><strong>Stacking:</strong> Can be played on Attack to pass 2 turns to next player</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🎯 Targeted Attack</div>
+                <p><strong>Effect:</strong> Choose any player to take 2 turns</p>
+                <p><strong>Targeting:</strong> Skip turn order, target specific player</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🎁 Favor</div>
+                <p><strong>Effect:</strong> Force another player to give you a card of their choice</p>
+                <p><strong>Selection:</strong> They choose which card to give you</p>
+              </div>
+
+              <div class="card">
+                <div class="card-name">🐱 Cat Cards</div>
+                <p><strong>Types:</strong> Tacocat, Rainbow Cat, Potato Cat, Beard Cat, Cattermelon</p>
+                <p><strong>Pairs:</strong> Play 2 identical cats to steal random card from player</p>
+                <p><strong>Triples:</strong> Play 3 identical cats to name and steal specific card</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ek-scenarios">
+        <div class="section">
+          <h3 class="section-title">📋 Common Scenarios</h3>
+          <div class="section-content">
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 1: Multiple Attacks</div>
+              <p><strong>Situation:</strong> Player A plays Attack, Player B plays Attack in response.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Player B's Attack cancels their 2 turns</li>
+                <li>Player C (next after B) must take 2 turns</li>
+                <li>Attacks can be chained indefinitely</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 2: Nope Chain</div>
+              <p><strong>Situation:</strong> Player A plays See the Future, Player B plays Nope, Player C plays Nope on
+                the Nope.</p>
+              <p><strong>Resolution:</strong>
+              <ol>
+                <li>Player C's Nope cancels Player B's Nope</li>
+                <li>Original See the Future takes effect</li>
+                <li>Nopes can be chained indefinitely</li>
+              </ol>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 3: Cat Card Theft</div>
+              <p><strong>Situation:</strong> You play 2 Tacocats to steal from a player with no cards.</p>
+              <p><strong>Resolution:</strong> The action fails - you cannot steal from a player with no cards.</p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 4: Defuse Placement Strategy</div>
+              <p><strong>Situation:</strong> You defuse an Exploding Kitten and want to place it strategically.</p>
+              <p><strong>Strategy:</strong>
+              <ul>
+                <li>Put it on top to force next player to draw it</li>
+                <li>Put it deep in deck for later</li>
+                <li>Consider who plays next and their cards</li>
+              </ul>
+              </p>
+            </div>
+
+            <div class="scenario-box">
+              <div class="scenario-title">Scenario 5: End Game with 2 Players</div>
+              <p><strong>Situation:</strong> 2 players left, 1 Exploding Kitten in small deck.</p>
+              <p><strong>Strategy:</strong>
+              <ul>
+                <li>Use See the Future to check top cards</li>
+                <li>Use Skip to avoid drawing</li>
+                <li>Use Attack to force opponent to draw</li>
+                <li>Save Defuse as last resort</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ek-strategy">
+        <div class="section">
+          <h3 class="section-title">🧠 Strategy Guide</h3>
+          <div class="section-content">
+            <div class="subsection">
+              <h4 class="subsection-title">Early Game Strategy</h4>
+              <ul>
+                <li>Save your Defuse card - don't use it carelessly</li>
+                <li>Use See the Future to gather information</li>
+                <li>Build pairs of cat cards for theft opportunities</li>
+                <li>Don't attack randomly - save for strategic moments</li>
+              </ul>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Mid Game Strategy</h4>
+              <ul>
+                <li>Start using attacks more aggressively</li>
+                <li>Use Favor cards to get specific cards you need</li>
+                <li>Pay attention to what cards other players have</li>
+                <li>Use Shuffle when you suspect Exploding Kittens on top</li>
+              </ul>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">End Game Strategy</h4>
+              <ul>
+                <li>Hoard Skip cards for safety</li>
+                <li>Use targeted attacks on players without defenses</li>
+                <li>Count remaining Exploding Kittens vs. deck size</li>
+                <li>Force other players to draw when possible</li>
+              </ul>
+            </div>
+
+            <div class="subsection">
+              <h4 class="subsection-title">Card Priority</h4>
+              <p><strong>High Priority:</strong> Defuse, Skip, Attack</p>
+              <p><strong>Medium Priority:</strong> See the Future, Nope, Targeted Attack</p>
+              <p><strong>Low Priority:</strong> Favor, Cat Cards, Shuffle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Game switching functionality
+    const gameButtons = document.querySelectorAll('.game-button');
+    const gameContents = document.querySelectorAll('.game-content');
+
+    gameButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetGame = button.dataset.game;
+
+        // Update active button
+        gameButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Update active content
+        gameContents.forEach(content => {
+          content.classList.remove('active');
+          if (content.id === targetGame) {
+            content.classList.add('active');
+          }
+        });
+
+        // Reset tabs to first tab for the selected game
+        resetTabsForGame(targetGame);
+      });
+    });
+
+    // Tab functionality
+    function resetTabsForGame(gameId) {
+      const gameContent = document.getElementById(gameId);
+      const tabButtons = gameContent.querySelectorAll('.tab-button');
+      const tabContents = gameContent.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      if (tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+        const firstTabId = tabButtons[0].dataset.tab;
+        const firstTabContent = document.getElementById(firstTabId);
+        if (firstTabContent) {
+          firstTabContent.classList.add('active');
+        }
+      }
+    }
+
+    // Add click handlers for all tab buttons
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('tab-button')) {
+        const targetTab = e.target.dataset.tab;
+        const gameContent = e.target.closest('.game-content');
+
+        // Update active tab button
+        gameContent.querySelectorAll('.tab-button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+
+        // Update active tab content
+        gameContent.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+
+        const targetContent = document.getElementById(targetTab);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      }
+    });
+
+    // Collapsible sections
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('section-title')) {
+        const sectionContent = e.target.nextElementSibling;
+        const isCollapsed = sectionContent.classList.contains('collapsed');
+
+        if (isCollapsed) {
+          sectionContent.classList.remove('collapsed');
+          e.target.classList.remove('collapsed');
+        } else {
+          sectionContent.classList.add('collapsed');
+          e.target.classList.add('collapsed');
+        }
+      }
+    });
+
+    // Search functionality
+    const searchBox = document.getElementById('searchBox');
+    const quickRef = document.getElementById('quickRef');
+    const quickRefContent = document.getElementById('quickRefContent');
+
+    searchBox.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+
+      if (searchTerm.length > 2) {
+        performSearch(searchTerm);
+        quickRef.classList.add('show');
+      } else {
+        quickRef.classList.remove('show');
+      }
+    });
+
+    function performSearch(searchTerm) {
+      const results = [];
+      const allText = document.querySelectorAll('.game-content p, .game-content li, .card-name, .subsection-title');
+
+      allText.forEach(element => {
+        if (element.textContent.toLowerCase().includes(searchTerm)) {
+          const gameContent = element.closest('.game-content');
+          const gameName = gameContent ? gameContent.id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : '';
+
+          results.push({
+            text: element.textContent.substr(0, 100) + '...',
+            game: gameName,
+            element: element
+          });
+        }
+      });
+
+      displaySearchResults(results.slice(0, 5)); // Show top 5 results
+    }
+
+    function displaySearchResults(results) {
+      if (results.length === 0) {
+        quickRefContent.innerHTML = '<p>No results found</p>';
+        return;
+      }
+
+      let html = '<ul>';
+      results.forEach(result => {
+        html += `<li><strong>${result.game}</strong><br>${result.text}</li>`;
+      });
+      html += '</ul>';
+
+      quickRefContent.innerHTML = html;
+    }
+
+    // Initialize first game tabs
+    resetTabsForGame('unstable-unicorns');
+
+    // Mobile responsive quick reference
+    function toggleQuickRef() {
+      if (window.innerWidth <= 768) {
+        quickRef.style.position = 'relative';
+        quickRef.style.top = 'auto';
+        quickRef.style.right = 'auto';
+      } else {
+        quickRef.style.position = 'fixed';
+        quickRef.style.top = '20px';
+        quickRef.style.right = '20px';
+      }
+    }
+
+    window.addEventListener('resize', toggleQuickRef);
+    toggleQuickRef(); // Initial call
+  </script>
+</body>
+
+</html>
