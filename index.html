@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Board Games Guidelines</title>
-  <meta name="description" content="Comprehensive interactive rules and guidelines for Unstable Unicorns, Monopoly Deal, and Exploding Kittens board games.">
-  <meta name="keywords" content="board games, card games, rules, Unstable Unicorns, Monopoly Deal, Exploding Kittens, guidelines">
+  <meta name="description" content="Comprehensive interactive rules and guidelines for 11 tabletop and card games, including Unstable Unicorns, Monopoly Deal, Exploding Kittens, Mahjong, and six classic card games.">
+  <meta name="keywords" content="board games, card games, rules, Unstable Unicorns, Monopoly Deal, Exploding Kittens, Mahjong, Hearts, Blackjack, guidelines">
   <meta property="og:title" content="Interactive Board Games Guidelines">
-  <meta property="og:description" content="Your complete guide to playing Unstable Unicorns, Monopoly Deal, and Exploding Kittens with detailed rules and scenarios.">
+  <meta property="og:description" content="Your complete guide to playing 11 tabletop and card games, with detailed rules, scoring, and scenarios.">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -20,7 +20,8 @@
         <span id="theme-icon">🌙</span> <span id="theme-text">Dark</span>
       </button>
       <h1>Interactive Board Games Guidelines</h1>
-      <p class="subtitle">Comprehensive rules and scenarios for Unstable Unicorns, Monopoly Deal, and Exploding Kittens
+      <p class="subtitle">Comprehensive rules and scenarios for 11 tabletop and card games &mdash; Unstable Unicorns,
+        Monopoly Deal, Exploding Kittens, Mahjong, and six classic card games
       </p>
     </header>
 
@@ -32,6 +33,7 @@
 
       <!-- Enhanced Quick Reference Panel -->
       <aside class="quick-reference" id="quickRef" role="complementary" aria-label="Quick reference search results">
+        <button class="quick-ref-close" id="quickRefClose" aria-label="Close search results">&times;</button>
         <h3 class="quick-ref-title">Search Results</h3>
         <div class="search-filters" id="searchFilters"></div>
         <div class="search-stats" id="searchStats"></div>
@@ -68,6 +70,78 @@
               <button class="tab-button" id="ek-cards-tab" data-game="exploding-kittens" data-tab="ek-cards" role="tab" aria-selected="false" aria-controls="ek-cards" tabindex="-1">Card Types</button>
               <button class="tab-button" id="ek-scenarios-tab" data-game="exploding-kittens" data-tab="ek-scenarios" role="tab" aria-selected="false" aria-controls="ek-scenarios" tabindex="-1">Scenarios</button>
               <button class="tab-button" id="ek-strategy-tab" data-game="exploding-kittens" data-tab="ek-strategy" role="tab" aria-selected="false" aria-controls="ek-strategy" tabindex="-1">Strategy</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="japanese-riichi-tab" data-game="japanese-riichi" data-game-name="Japanese Riichi" role="tab" aria-selected="false" aria-controls="japanese-riichi">🀄 Japanese Riichi</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="jr-setup-tab" data-game="japanese-riichi" data-tab="jr-setup" role="tab" aria-selected="true" aria-controls="jr-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="jr-gameplay-tab" data-game="japanese-riichi" data-tab="jr-gameplay" role="tab" aria-selected="false" aria-controls="jr-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="jr-scoring-tab" data-game="japanese-riichi" data-tab="jr-scoring" role="tab" aria-selected="false" aria-controls="jr-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="jr-faq-tab" data-game="japanese-riichi" data-tab="jr-faq" role="tab" aria-selected="false" aria-controls="jr-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="chinese-classical-tab" data-game="chinese-classical" data-game-name="Chinese Classical" role="tab" aria-selected="false" aria-controls="chinese-classical">🏮 Chinese Classical</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="cc-setup-tab" data-game="chinese-classical" data-tab="cc-setup" role="tab" aria-selected="true" aria-controls="cc-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="cc-gameplay-tab" data-game="chinese-classical" data-tab="cc-gameplay" role="tab" aria-selected="false" aria-controls="cc-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="cc-scoring-tab" data-game="chinese-classical" data-tab="cc-scoring" role="tab" aria-selected="false" aria-controls="cc-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="cc-faq-tab" data-game="chinese-classical" data-tab="cc-faq" role="tab" aria-selected="false" aria-controls="cc-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="hearts-tab" data-game="hearts" data-game-name="Hearts" role="tab" aria-selected="false" aria-controls="hearts">♥️ Hearts</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="ht-setup-tab" data-game="hearts" data-tab="ht-setup" role="tab" aria-selected="true" aria-controls="ht-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="ht-gameplay-tab" data-game="hearts" data-tab="ht-gameplay" role="tab" aria-selected="false" aria-controls="ht-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="ht-scoring-tab" data-game="hearts" data-tab="ht-scoring" role="tab" aria-selected="false" aria-controls="ht-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="ht-faq-tab" data-game="hearts" data-tab="ht-faq" role="tab" aria-selected="false" aria-controls="ht-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="crazy-eights-tab" data-game="crazy-eights" data-game-name="Crazy Eights" role="tab" aria-selected="false" aria-controls="crazy-eights">8️⃣ Crazy Eights</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="ce-setup-tab" data-game="crazy-eights" data-tab="ce-setup" role="tab" aria-selected="true" aria-controls="ce-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="ce-gameplay-tab" data-game="crazy-eights" data-tab="ce-gameplay" role="tab" aria-selected="false" aria-controls="ce-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="ce-scoring-tab" data-game="crazy-eights" data-tab="ce-scoring" role="tab" aria-selected="false" aria-controls="ce-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="ce-faq-tab" data-game="crazy-eights" data-tab="ce-faq" role="tab" aria-selected="false" aria-controls="ce-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="president-tab" data-game="president" data-game-name="President" role="tab" aria-selected="false" aria-controls="president">👑 President</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="pr-setup-tab" data-game="president" data-tab="pr-setup" role="tab" aria-selected="true" aria-controls="pr-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="pr-gameplay-tab" data-game="president" data-tab="pr-gameplay" role="tab" aria-selected="false" aria-controls="pr-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="pr-scoring-tab" data-game="president" data-tab="pr-scoring" role="tab" aria-selected="false" aria-controls="pr-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="pr-faq-tab" data-game="president" data-tab="pr-faq" role="tab" aria-selected="false" aria-controls="pr-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="big-two-tab" data-game="big-two" data-game-name="Big Two" role="tab" aria-selected="false" aria-controls="big-two">2️⃣ Big Two</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="bt-setup-tab" data-game="big-two" data-tab="bt-setup" role="tab" aria-selected="true" aria-controls="bt-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="bt-gameplay-tab" data-game="big-two" data-tab="bt-gameplay" role="tab" aria-selected="false" aria-controls="bt-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="bt-scoring-tab" data-game="big-two" data-tab="bt-scoring" role="tab" aria-selected="false" aria-controls="bt-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="bt-faq-tab" data-game="big-two" data-tab="bt-faq" role="tab" aria-selected="false" aria-controls="bt-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="chinese-poker-tab" data-game="chinese-poker" data-game-name="Chinese Poker" role="tab" aria-selected="false" aria-controls="chinese-poker">🎴 Chinese Poker</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="cp-setup-tab" data-game="chinese-poker" data-tab="cp-setup" role="tab" aria-selected="true" aria-controls="cp-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="cp-gameplay-tab" data-game="chinese-poker" data-tab="cp-gameplay" role="tab" aria-selected="false" aria-controls="cp-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="cp-scoring-tab" data-game="chinese-poker" data-tab="cp-scoring" role="tab" aria-selected="false" aria-controls="cp-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="cp-faq-tab" data-game="chinese-poker" data-tab="cp-faq" role="tab" aria-selected="false" aria-controls="cp-faq" tabindex="-1">FAQ</button>
+            </div>
+          </div>
+          <div class="toc-game">
+            <button class="game-button" id="blackjack-tab" data-game="blackjack" data-game-name="Blackjack" role="tab" aria-selected="false" aria-controls="blackjack">🎰 Blackjack</button>
+            <div class="toc-tabs">
+              <button class="tab-button active" id="bj-setup-tab" data-game="blackjack" data-tab="bj-setup" role="tab" aria-selected="true" aria-controls="bj-setup" tabindex="0">Setup</button>
+              <button class="tab-button" id="bj-gameplay-tab" data-game="blackjack" data-tab="bj-gameplay" role="tab" aria-selected="false" aria-controls="bj-gameplay" tabindex="-1">Gameplay</button>
+              <button class="tab-button" id="bj-scoring-tab" data-game="blackjack" data-tab="bj-scoring" role="tab" aria-selected="false" aria-controls="bj-scoring" tabindex="-1">Scoring</button>
+              <button class="tab-button" id="bj-faq-tab" data-game="blackjack" data-tab="bj-faq" role="tab" aria-selected="false" aria-controls="bj-faq" tabindex="-1">FAQ</button>
             </div>
           </div>
         </nav>
@@ -989,6 +1063,1186 @@
             </div>
           </section>
         </div>
+      </article>
+      <article class="game-content" id="japanese-riichi" role="tabpanel" aria-labelledby="japanese-riichi-tab">
+        <header class="game-header">
+          <h2 class="game-title">🀄 Japanese Riichi</h2>
+          <p class="game-description">Four-player tile game: build four sets and a pair, declare riichi when you're one tile away, and score by yaku (scoring patterns) plus fu (bonus points).</p>
+        </header>
+
+        <div class="tab-content" id="jr-setup" role="tabpanel" aria-labelledby="jr-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="jr-setup-content">Setup</h3>
+            <div class="section-content" id="jr-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick the <strong>Japanese Riichi</strong> ruleset and a mode: you vs 3 AI, or local hot-seat (4 players passing one device).</li>
+                  <li>On your turn, click a tile in your hand to discard it, or use the Riichi / Tsumo / Kan button in the action bar when it's lit up.</li>
+                  <li>When someone else discards a tile you can call, choose Pon / Chi / Kan / Ron, or Pass.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns so other players can't see your hand.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">The Complete Tile Set</h4>
+                <p>34 unique tiles, each appearing 4 times in a full set of 136:</p>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀈</span><span class="tile">🀉</span><span class="tile">🀊</span><span class="tile">🀋</span><span class="tile">🀌</span><span class="tile">🀍</span><span class="tile">🀎</span><span class="tile">🀏</span>
+                  <span class="tile-label">Characters (man), 1-9</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀐</span><span class="tile">🀑</span><span class="tile">🀒</span><span class="tile">🀓</span><span class="tile">🀔</span><span class="tile">🀕</span><span class="tile">🀖</span><span class="tile">🀗</span><span class="tile">🀘</span>
+                  <span class="tile-label">Bamboo (sou), 1-9 &mdash; 1-sou is traditionally drawn as a bird</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀙</span><span class="tile">🀚</span><span class="tile">🀛</span><span class="tile">🀜</span><span class="tile">🀝</span><span class="tile">🀞</span><span class="tile">🀟</span><span class="tile">🀠</span><span class="tile">🀡</span>
+                  <span class="tile-label">Circles (pin), 1-9</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀀</span><span class="tile">🀁</span><span class="tile">🀂</span><span class="tile">🀃</span>
+                  <span class="tile-label">Winds: East, South, West, North</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀄&#xFE0E;</span><span class="tile">🀅</span><span class="tile">🀆</span>
+                  <span class="tile-label">Dragons: Red, Green, White &mdash; White is traditionally a blank tile</span>
+                </div>
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li><strong>Goal:</strong> be first to complete a hand of 4 sets + 1 pair (14 tiles counting the winning tile), or the special all-pairs shape Seven Pairs. A set is a <em>run</em> (3 consecutive tiles, same suit), a <em>triplet</em> (3 identical tiles), or a <em>kan</em> (4 identical tiles).</li>
+                </ul>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀈</span><span class="tile">🀉</span>
+                  <span class="tile-label">Run (Chi)</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀋</span><span class="tile">🀋</span><span class="tile">🀋</span>
+                  <span class="tile-label">Triplet (Pon)</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀙</span><span class="tile">🀙</span><span class="tile">🀙</span><span class="tile">🀙</span>
+                  <span class="tile-label">Kan (four of a kind)</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀀</span><span class="tile">🀀</span>
+                  <span class="tile-label">Pair</span>
+                </div>
+                <ul>
+                  <li><strong>Turn order</strong> is counter-clockwise: East &rarr; South &rarr; West &rarr; North &rarr; East...</li>
+                  <li><strong>Each turn:</strong> draw a tile, then discard one (unless you complete your hand and declare a win instead).</li>
+                  <li><strong>Calls</strong>, made on someone else's discard, jump the normal turn order: <strong>Chi</strong> (claim to complete a run, left-hand player's discard only), <strong>Pon</strong> (claim to complete a triplet, any seat), <strong>Kan</strong> (claim to complete a set of 4, draws a bonus tile), <strong>Ron</strong> (claim as your winning tile, ends the hand). Ron outranks Pon/Kan, which outrank Chi.</li>
+                  <li>A hand also ends in an <strong>exhaustive draw</strong> if the wall runs out before anyone wins.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li><strong>Wind badge:</strong> this seat's own seat wind, changing each hand as the deal rotates.</li>
+                  <li><strong>Dealer marker:</strong> shown only on the current dealer (East); the dealer's hand pays/wins double.</li>
+                  <li><strong>Riichi stick:</strong> appears once a seat has declared Riichi.</li>
+                  <li><strong>Melds / Discards / Hand:</strong> called sets laid face-up, every tile thrown this hand in order, and your own concealed tiles (most recently drawn tile outlined).</li>
+                  <li>The table center shows the round (e.g. "East 1"), honba count, tiles left in the wall, the riichi-stick pot, and the dora indicator once the hand starts.</li>
+                </ul>
+
+              </div>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Control</th><th>When it appears</th><th>What it does</th></tr></thead>
+                    <tbody>
+                  <tr><td>Click a hand tile</td><td>Your turn, no riichi lock</td><td>Discards that tile.</td></tr>
+                  <tr><td><strong>Riichi</strong> button</td><td>Closed hand, one discard from tenpai, score &ge; 1000</td><td>Locks your hand (only the tile you draw may be discarded from then on) and puts 1000 points into the riichi-stick pot in exchange for extra yaku and ura-dora if you win.</td></tr>
+                  <tr><td><strong>Tsumo</strong> button</td><td>Your just-drawn tile completes your hand</td><td>Declares a self-drawn win.</td></tr>
+                  <tr><td>Kan options</td><td>You hold 4-of-a-kind, or can add a 4th tile to an existing pon</td><td>Declares a kan; draws a replacement tile and flips a new dora indicator.</td></tr>
+                  <tr><td><strong>Pon / Chi / Kan / Ron</strong></td><td>Someone else's discard is callable</td><td>Claims the discard as described above.</td></tr>
+                  <tr><td><strong>Pass</strong></td><td>Same call panel</td><td>Declines the call; play continues normally.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="jr-gameplay" role="tabpanel" aria-labelledby="jr-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="jr-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="jr-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Hand shape &amp; winning</h4>
+                <p>A winning hand is either <strong>4 sets + 1 pair</strong>, <strong>Seven Pairs</strong> (7 unique pairs, hand must be fully closed), or the rare <strong>Kokushi Musou</strong> shape (one of each terminal/honor tile, plus a pair among them). You also need at least one <strong>yaku</strong> (scoring pattern) to win &mdash; a shape with zero yaku cannot be declared.</p>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀈</span><span class="tile">🀉</span>
+                  <span class="tile">🀐</span><span class="tile">🀑</span><span class="tile">🀒</span>
+                  <span class="tile">🀔</span><span class="tile">🀔</span><span class="tile">🀔</span>
+                  <span class="tile">🀛</span><span class="tile">🀛</span><span class="tile">🀛</span>
+                  <span class="tile">🀀</span><span class="tile">🀀</span>
+                  <span class="tile-label">Example: 4 sets + 1 pair (2 runs, 2 triplets, a pair)</span>
+                </div>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Riichi, dora, and related mechanics</h4>
+                <ul>
+                  <li><strong>Riichi:</strong> declare when your hand is closed, &ge;1000 points, and one tile from complete (tenpai). Costs 1000 points, returned to whoever wins the pot. After declaring, you can only discard the tile you just drew.</li>
+                  <li><strong>Ippatsu:</strong> win within your very next go-around after declaring riichi, with no calls by anyone in between.</li>
+                  <li><strong>Dora:</strong> bonus indicator tiles revealed at hand start (and one more per kan). Each dora tile in your hand adds 1 han. <strong>Ura-dora</strong> (hidden dora) only counts if you declared riichi and won.</li>
+                  <li><strong>Furiten:</strong> if any tile that would complete your hand is in your own discard pile, you cannot Ron (you may still Tsumo).</li>
+                  <li><strong>Kan:</strong> closed (ankan) from 4 tiles in hand, or added (shouminkan) onto your own pon. Either draws a replacement tile and flips a new dora indicator. Once you've declared riichi, you can no longer kan.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Game length</h4>
+                <p>A full game is a <strong>hanchan</strong>: East round then South round, 4 hands each (8 total, more with repeats/draws), or it ends early if any player's score drops below zero.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="jr-scoring" role="tabpanel" aria-labelledby="jr-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="jr-scoring-content">Scoring</h3>
+            <div class="section-content" id="jr-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Yaku (scoring patterns)</h4>
+                <p>Every winning hand needs at least one of these. Han values shown are <strong>closed</strong> / <strong>open</strong> hand where they differ.</p>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Yaku</th><th>Han</th><th>Requirement</th></tr></thead>
+                    <tbody>
+                  <tr><td>Riichi</td><td>1</td><td>Declared riichi this hand.</td></tr>
+                  <tr><td>Double Riichi</td><td>2</td><td>Riichi declared on your very first discard, before any call at the table.</td></tr>
+                  <tr><td>Ippatsu</td><td>1</td><td>Won within one go-around of riichi, no calls in between.</td></tr>
+                  <tr><td>Menzen Tsumo</td><td>1</td><td>Self-drawn win with a fully closed hand.</td></tr>
+                  <tr><td>Pinfu</td><td>1</td><td>Closed hand, all runs, non-yakuhai pair, two-sided wait.</td></tr>
+                  <tr><td>Tanyao (All Simples)</td><td>1</td><td>No terminals (1s/9s) or honor tiles anywhere in the hand.</td></tr>
+                  <tr><td>Iipeikou</td><td>1</td><td>Closed hand, two identical runs (e.g. 234m + 234m).</td></tr>
+                  <tr><td>Yakuhai</td><td>1 each</td><td>A triplet/kan of a dragon, your seat wind, or the round wind.</td></tr>
+                  <tr><td>Sanshoku Doujun</td><td>2 / 1</td><td>The same run in all three suits.</td></tr>
+                  <tr><td>Toitoitsu (All Triplets)</td><td>2</td><td>All four sets are triplets/kans.</td></tr>
+                  <tr><td>Honitsu</td><td>3 / 2</td><td>One suit plus honors only.</td></tr>
+                  <tr><td>Chinitsu</td><td>6 / 5</td><td>One suit only, no honors at all.</td></tr>
+                  <tr><td>Chiitoitsu (Seven Pairs)</td><td>2</td><td>Seven unique pairs; hand must be closed.</td></tr>
+                  <tr><td>Dora / Ura-dora</td><td>1 each</td><td>Not a yaku by itself &mdash; only counts alongside a real yaku.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p><strong>Yakuman</strong> (limit hands, 13 han): Kokushi Musou, Suuankou (four concealed triplets), Daisangen (all three dragon triplets), Shousuushi/Daisuushi (three or four wind triplets), Tsuuiisou (all honors), Chinroutou (all terminals), Ryuuiisou (all green tiles).</p>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Fu (bonus points)</h4>
+                <p>Fu adds a second scoring dimension on top of han. Start at 20 and add points for triplets/kans (more for terminal/honor tiles, more again if concealed), a valuable pair, an awkward wait, and how the hand was won &mdash; then round up to the nearest 10. <strong>Pinfu</strong> is a fixed exception: 20 fu on tsumo, 30 fu on ron. Chiitoitsu is always exactly 25 fu.</p>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Scoring reference</h4>
+                <p>Base points = fu &times; 2<sup>(2+han)</sup>, capped at the Mangan value, then fixed tiers take over at 5+ han. The dealer pays/receives 1.5&times; the non-dealer figures below, and on tsumo every other seat pays their own share (not split).</p>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Han / Fu</th><th>Ron (paid by discarder)</th><th>Tsumo (dealer / each non-dealer)</th></tr></thead>
+                    <tbody>
+                  <tr><td>1 han, 30 fu</td><td>1000</td><td>500 / 300</td></tr>
+                  <tr><td>2 han, 30 fu</td><td>2000</td><td>1000 / 500</td></tr>
+                  <tr><td>3 han, 30 fu</td><td>3900</td><td>2000 / 1000</td></tr>
+                  <tr><td>4 han, 30 fu</td><td>7700</td><td>3900 / 2000</td></tr>
+                  <tr><td>Mangan (5 han, or capped)</td><td>8000</td><td>4000 / 2000</td></tr>
+                  <tr><td>Haneman (6-7 han)</td><td>12000</td><td>6000 / 3000</td></tr>
+                  <tr><td>Baiman (8-10 han)</td><td>16000</td><td>8000 / 4000</td></tr>
+                  <tr><td>Sanbaiman (11-12 han)</td><td>24000</td><td>12000 / 6000</td></tr>
+                  <tr><td>Yakuman (13+ han)</td><td>32000</td><td>16000 / 8000</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="jr-faq" role="tabpanel" aria-labelledby="jr-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="jr-faq-content">FAQ</h3>
+            <div class="section-content" id="jr-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Tenpai</div>
+                    <p>One tile away from a complete hand.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Noten</div>
+                    <p>Not tenpai &mdash; more than one tile away from complete.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Shanten</div>
+                    <p>How many tiles away from tenpai a hand is (0 = tenpai already).</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Menzen</div>
+                    <p>A hand with no open (called) melds &mdash; fully concealed except possibly closed kans.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Ron / Tsumo</div>
+                    <p>Winning by claiming a discard, or by self-draw.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Chi / Pon / Kan</div>
+                    <p>Calling a discard to complete a run / triplet / set-of-four.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Honba</div>
+                    <p>A repeat-hand counter that adds a small bonus to the winner's score.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Furiten</div>
+                    <p>Being blocked from declaring Ron because a winning tile is already in your own discards.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Han / Fu</div>
+                    <p>The two inputs to the scoring formula &mdash; yaku count and a separate bonus-point tally.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Renchan</div>
+                    <p>The dealer keeping the deal for another hand.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li><strong>Furiten</strong> is permanent-only &mdash; the temporary variants aren't modeled separately.</li>
+                  <li><strong>No riichi eligibility check on wall size</strong> &mdash; real rules forbid riichi with fewer than 4 tiles left; this isn't enforced.</li>
+                  <li><strong>No kan after riichi</strong> is disabled outright, rather than only when it provably doesn't change your wait.</li>
+                  <li><strong>Chankan</strong> (robbing a kan) only applies to added kans.</li>
+                  <li><strong>Two yakuman aren't implemented:</strong> Tenhou/Chiihou/Renhou and Chuurenpoutou/Suukantsu.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="chinese-classical" role="tabpanel" aria-labelledby="chinese-classical-tab">
+        <header class="game-header">
+          <h2 class="game-title">🏮 Chinese Classical</h2>
+          <p class="game-description">The traditional four-player tile game Riichi is based on: same 4-sets-and-a-pair target, no riichi/dora, and a simpler doubling-points scoring system.</p>
+        </header>
+
+        <div class="tab-content" id="cc-setup" role="tabpanel" aria-labelledby="cc-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cc-setup-content">Setup</h3>
+            <div class="section-content" id="cc-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick the <strong>Chinese Classical</strong> ruleset and a mode: you vs 3 AI, or local hot-seat (4 players passing one device).</li>
+                  <li>On your turn, click a tile in your hand to discard it, or use the Tsumo / Kan button in the action bar when it's lit up.</li>
+                  <li>When someone else discards a tile you can call, choose Pon / Chi / Kan / Ron, or Pass.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns so other players can't see your hand.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">The Complete Tile Set</h4>
+                <p>34 unique tiles, each appearing 4 times in a full set of 136:</p>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀈</span><span class="tile">🀉</span><span class="tile">🀊</span><span class="tile">🀋</span><span class="tile">🀌</span><span class="tile">🀍</span><span class="tile">🀎</span><span class="tile">🀏</span>
+                  <span class="tile-label">Characters (man), 1-9</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀐</span><span class="tile">🀑</span><span class="tile">🀒</span><span class="tile">🀓</span><span class="tile">🀔</span><span class="tile">🀕</span><span class="tile">🀖</span><span class="tile">🀗</span><span class="tile">🀘</span>
+                  <span class="tile-label">Bamboo (sou), 1-9 &mdash; 1-sou is traditionally drawn as a bird</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀙</span><span class="tile">🀚</span><span class="tile">🀛</span><span class="tile">🀜</span><span class="tile">🀝</span><span class="tile">🀞</span><span class="tile">🀟</span><span class="tile">🀠</span><span class="tile">🀡</span>
+                  <span class="tile-label">Circles (pin), 1-9</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀀</span><span class="tile">🀁</span><span class="tile">🀂</span><span class="tile">🀃</span>
+                  <span class="tile-label">Winds: East, South, West, North</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀄&#xFE0E;</span><span class="tile">🀅</span><span class="tile">🀆</span>
+                  <span class="tile-label">Dragons: Red, Green, White &mdash; White is traditionally a blank tile</span>
+                </div>
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li><strong>Goal:</strong> be first to complete a hand of 4 sets + 1 pair (14 tiles counting the winning tile), or the special all-pairs shape Seven Pairs. A set is a <em>run</em>, a <em>triplet</em>, or a <em>kan</em> (4 identical tiles).</li>
+                </ul>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀈</span><span class="tile">🀉</span>
+                  <span class="tile-label">Run</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀋</span><span class="tile">🀋</span><span class="tile">🀋</span>
+                  <span class="tile-label">Triplet</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀙</span><span class="tile">🀙</span><span class="tile">🀙</span><span class="tile">🀙</span>
+                  <span class="tile-label">Kan (four of a kind)</span>
+                </div>
+                <div class="tile-row">
+                  <span class="tile">🀀</span><span class="tile">🀀</span>
+                  <span class="tile-label">Pair</span>
+                </div>
+                <ul>
+                  <li><strong>Turn order</strong> is counter-clockwise: East &rarr; South &rarr; West &rarr; North &rarr; East...</li>
+                  <li><strong>Each turn:</strong> draw a tile, then discard one (unless you complete your hand and declare a win instead).</li>
+                  <li><strong>Calls</strong>, made on someone else's discard, jump the normal turn order: <strong>Chi</strong> (left-hand player's discard only), <strong>Pon</strong> (any seat), <strong>Kan</strong> (draws a bonus tile), <strong>Ron</strong> (claim as your winning tile, ends the hand). Ron outranks Pon/Kan, which outrank Chi.</li>
+                  <li>A hand also ends in an <strong>exhaustive draw</strong> if the wall runs out before anyone wins.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li><strong>Wind badge:</strong> this seat's own seat wind, changing each hand as the deal rotates.</li>
+                  <li><strong>Dealer marker:</strong> shown only on the current dealer (East); the dealer's payment is doubled.</li>
+                  <li><strong>Melds / Discards / Hand:</strong> called sets laid face-up, every tile thrown this hand in order, and your own concealed tiles.</li>
+                  <li>The table center shows the round and tiles left in the wall. There is no riichi stick or dora indicator in this ruleset.</li>
+                </ul>
+
+              </div>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Control</th><th>When it appears</th><th>What it does</th></tr></thead>
+                    <tbody>
+                  <tr><td>Click a hand tile</td><td>Your turn</td><td>Discards that tile.</td></tr>
+                  <tr><td><strong>Tsumo</strong> button</td><td>Your just-drawn tile completes your hand</td><td>Declares a self-drawn win.</td></tr>
+                  <tr><td>Kan options</td><td>You hold 4-of-a-kind, or can add a 4th tile to an existing pon</td><td>Declares a kan; draws a replacement tile.</td></tr>
+                  <tr><td><strong>Pon / Chi / Kan / Ron</strong></td><td>Someone else's discard is callable</td><td>Claims the discard as described above.</td></tr>
+                  <tr><td><strong>Pass</strong></td><td>Same call panel</td><td>Declines the call; play continues normally.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cc-gameplay" role="tabpanel" aria-labelledby="cc-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cc-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="cc-gameplay-content">
+              <div class="highlight">
+                "Chinese Classical" scoring was never standardized the way modern competitive Riichi is &mdash; regional rule sets differ significantly. This build uses one clearly-defined, internally consistent doubling-point variant, documented in full below rather than assumed.
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Hand shape &amp; winning</h4>
+                <p>Same target shape as Riichi's basic case: <strong>4 sets + 1 pair</strong>, or <strong>Seven Pairs</strong>. There is no riichi declaration, no dora, and no ura-dora in this ruleset &mdash; none of those are classical concepts.</p>
+                <div class="tile-row">
+                  <span class="tile">🀇</span><span class="tile">🀇</span>
+                  <span class="tile">🀐</span><span class="tile">🀐</span>
+                  <span class="tile">🀙</span><span class="tile">🀙</span>
+                  <span class="tile">🀀</span><span class="tile">🀀</span>
+                  <span class="tile">🀁</span><span class="tile">🀁</span>
+                  <span class="tile">🀂</span><span class="tile">🀂</span>
+                  <span class="tile">🀃</span><span class="tile">🀃</span>
+                  <span class="tile-label">Example: Seven Pairs (7 unique pairs)</span>
+                </div>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Payment convention</h4>
+                <ul>
+                  <li><strong>Won off a discard:</strong> only the discarder pays the full score.</li>
+                  <li><strong>Won by self-draw:</strong> every other player pays the full score (not split three ways).</li>
+                  <li><strong>Dealer win:</strong> whichever of the above applies, the payment amount is doubled.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Game length</h4>
+                <p>Played as a fixed number of hands (round limit set at game start) rather than Riichi's East+South structure.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cc-scoring" role="tabpanel" aria-labelledby="cc-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cc-scoring-content">Scoring</h3>
+            <div class="section-content" id="cc-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Doubling points</h4>
+                <p>Score = 8 base points &times; 2<sup>doubles</sup>, capped at 8 doubles (2048 points), doubled again for the dealer. Each pattern below contributes doubles; a hand can combine several.</p>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Pattern</th><th>Doubles</th></tr></thead>
+                    <tbody>
+                  <tr><td>Seven Pairs</td><td>2</td></tr>
+                  <tr><td>Concealed Hand (won by discard, fully closed)</td><td>1</td></tr>
+                  <tr><td>Self-Drawn</td><td>1</td></tr>
+                  <tr><td>Closed Wait (tanki / kanchan / penchan)</td><td>1</td></tr>
+                  <tr><td>Dragon Triplet</td><td>1 (per dragon)</td></tr>
+                  <tr><td>Seat Wind Triplet</td><td>1</td></tr>
+                  <tr><td>Round Wind Triplet</td><td>1</td></tr>
+                  <tr><td>Small Three Dragons</td><td>2</td></tr>
+                  <tr><td>Small Four Winds</td><td>3</td></tr>
+                  <tr><td>All Triplets (Peng Peng Hu)</td><td>1</td></tr>
+                  <tr><td>All Simples</td><td>1</td></tr>
+                  <tr><td>Half Flush (one suit + honors)</td><td>1</td></tr>
+                  <tr><td>Full Flush (one suit, no honors)</td><td>3</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Score by doubles</h4>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Doubles</th><th>Non-dealer score</th><th>Dealer score</th></tr></thead>
+                    <tbody>
+                  <tr><td>0</td><td>8</td><td>16</td></tr>
+                  <tr><td>1</td><td>16</td><td>32</td></tr>
+                  <tr><td>2</td><td>32</td><td>64</td></tr>
+                  <tr><td>3</td><td>64</td><td>128</td></tr>
+                  <tr><td>4</td><td>128</td><td>256</td></tr>
+                  <tr><td>5+</td><td>doubles again each step, capping at 2048 / 4096</td><td></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cc-faq" role="tabpanel" aria-labelledby="cc-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cc-faq-content">FAQ</h3>
+            <div class="section-content" id="cc-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Tenpai</div>
+                    <p>One tile away from a complete hand.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Menzen</div>
+                    <p>A hand with no open (called) melds.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Ron / Tsumo</div>
+                    <p>Winning by claiming a discard, or by self-draw.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Chi / Pon / Kan</div>
+                    <p>Calling a discard to complete a run / triplet / set-of-four.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Renchan</div>
+                    <p>The dealer keeping the deal for another hand.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li><strong>No minimum-pattern requirement:</strong> many regional rule sets require at least one scoring pattern to win at all ("no chicken hands"); this build lets any complete hand shape win, even for the base 8 points with zero doubles.</li>
+                  <li><strong>This scoring is a custom variant</strong> rather than a transcription of one specific regional rule set, since no single standard exists.</li>
+                  <li><strong>Exhaustive-draw dealer retention</strong> always keeps the deal with the same dealer, rather than following any particular region's convention.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="hearts" role="tabpanel" aria-labelledby="hearts-tab">
+        <header class="game-header">
+          <h2 class="game-title">♥️ Hearts</h2>
+          <p class="game-description">Trick-taking game for 4: avoid hearts and the Queen of Spades, unless you can collect every point card and shoot the moon.</p>
+        </header>
+
+        <div class="tab-content" id="ht-setup" role="tabpanel" aria-labelledby="ht-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ht-setup-content">Setup</h3>
+            <div class="section-content" id="ht-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>Hearts</strong>, then assign each of the 4 seats as Human, AI, or (where allowed) Off.</li>
+                  <li>Before each hand, select 3 cards from your hand and confirm to pass them to a neighbor.</li>
+                  <li>On your turn, click a card in your own hand to play it to the trick.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns so other players can't see your hand.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. Hearts is always exactly <strong>4 players</strong>.</li>
+                  <li><strong>Turn order</strong> runs clockwise from whoever leads the trick.</li>
+                  <li>The log panel below the table lists the most recent plays, in case you look away for a second.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>Each seat shows its name/tag (Human, AI, or You) and a running <strong>points</strong> total.</li>
+                  <li>The seat with a glowing border is the one currently acting.</li>
+                  <li>Your own hand is face up and clickable; every other seat is shown face down, count only.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ht-gameplay" role="tabpanel" aria-labelledby="ht-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ht-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="ht-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Passing</h4>
+                <p>Before each hand, every player passes 3 cards to a neighbor: left, right, across, then no pass at all &mdash; and the cycle repeats.</p>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Playing a trick</h4>
+                <ul>
+                  <li>Whoever holds the 2 of Clubs leads the very first trick, and must lead that exact card.</li>
+                </ul>
+                <div class="card-row">
+                  <span class="card-chip black">2&clubs;</span>
+                  <span class="tile-label">Leads the very first trick</span>
+                </div>
+                <ul>
+                  <li>Everyone else must follow the suit that was led if they can. If you can't follow suit, you may play anything.</li>
+                  <li>You can't lead a heart until hearts have been "broken" (played to a previous trick) &mdash; unless your entire hand is hearts.</li>
+                  <li>On the first trick only, you also can't play a heart or the Queen of Spades unless it's all you have left.</li>
+                  <li>The highest card of the suit that was led wins the trick and leads the next one.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ht-scoring" role="tabpanel" aria-labelledby="ht-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ht-scoring-content">Scoring</h3>
+            <div class="section-content" id="ht-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Scoring &amp; shooting the moon</h4>
+                <p>Each heart is worth 1 point, and the Queen of Spades is worth 13. When all 13 tricks are played, each player scores the points in the tricks they won.</p>
+                <div class="card-row">
+                  <span class="card-chip black">Q&spades;</span>
+                  <span class="tile-label">13 points</span>
+                  <span class="card-chip red">A&hearts;</span><span class="card-chip red">K&hearts;</span><span class="card-chip red">2&hearts;</span>
+                  <span class="tile-label">1 point each</span>
+                </div>
+              <div class="highlight">
+                <strong>Shooting the moon:</strong> if one player collects all 26 points in a single hand (every heart plus the Queen of Spades), they score 0 instead and everyone else takes 26.
+              </div>
+                <p>Hands repeat until someone reaches 100 points &mdash; the <strong>lowest</strong> total wins.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ht-faq" role="tabpanel" aria-labelledby="ht-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ht-faq-content">FAQ</h3>
+            <div class="section-content" id="ht-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Trick</div>
+                    <p>One card from each player, played in turn and won by the best card.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Broken (hearts)</div>
+                    <p>Once a heart has been played to any trick, hearts may be led from then on.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Shooting the moon</div>
+                    <p>Winning every point-scoring card in a hand &mdash; scores 0 instead of 26.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>Scoring resets each session (no saved match history).</li>
+                  <li>The pass cycle is left/right/across/hold, repeating every 4 hands.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="crazy-eights" role="tabpanel" aria-labelledby="crazy-eights-tab">
+        <header class="game-header">
+          <h2 class="game-title">8️⃣ Crazy Eights</h2>
+          <p class="game-description">Match suit or rank to the top discard, play an 8 to switch suits, and be first to empty your hand.</p>
+        </header>
+
+        <div class="tab-content" id="ce-setup" role="tabpanel" aria-labelledby="ce-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ce-setup-content">Setup</h3>
+            <div class="section-content" id="ce-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>Crazy Eights</strong>, then assign each seat as Human, AI, or Off (2-4 players).</li>
+                  <li>On your turn, click a card in your hand to play it, or use Draw / Pass when lit up.</li>
+                  <li>Playing an 8 lets you declare the suit that continues play.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. Crazy Eights plays with <strong>2-4</strong> players.</li>
+                  <li><strong>Turn order</strong> runs clockwise from whoever leads.</li>
+                  <li>The log panel below the table lists the most recent plays.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>Each seat shows its name/tag and <strong>cards left</strong> in hand.</li>
+                  <li>The seat with a glowing border is the one currently acting.</li>
+                  <li>Your own hand is face up and clickable; every other seat is shown face down, count only.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ce-gameplay" role="tabpanel" aria-labelledby="ce-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ce-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="ce-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">How to Play</h4>
+                <ul>
+                  <li>Each player starts with 7 cards (2-player games) or 5 cards (3-4 player games); the rest form the draw pile, with one card flipped to start the discard pile.</li>
+                  <li>On your turn, play a card that matches the <strong>suit</strong> or <strong>rank</strong> of the top discard, or play any <strong>8</strong> as a wild card.</li>
+                </ul>
+                <div class="card-row">
+                  <span class="card-chip black">8&clubs;</span><span class="card-chip red">8&diams;</span><span class="card-chip red">8&hearts;</span><span class="card-chip black">8&spades;</span>
+                  <span class="tile-label">Any 8 is wild &mdash; play it on anything and declare the next suit</span>
+                </div>
+                <ul>
+                  <li>Playing an 8 lets you declare the suit that continues play &mdash; the next player must match your declared suit (or play another 8).</li>
+                  <li>If you have no legal play, draw one card. If it's playable, you may play it immediately or keep it and pass; if it isn't playable, your turn ends automatically.</li>
+                  <li>If the draw pile runs out, the discard pile (except its top card) is reshuffled into a new draw pile.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ce-scoring" role="tabpanel" aria-labelledby="ce-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ce-scoring-content">Scoring</h3>
+            <div class="section-content" id="ce-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Winning</h4>
+                <p>There is no point-scoring across hands &mdash; the game ends the moment the first player plays their last card. That player wins.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ce-faq" role="tabpanel" aria-labelledby="ce-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="ce-faq-content">FAQ</h3>
+            <div class="section-content" id="ce-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Wild card</div>
+                    <p>An 8 &mdash; playable on anything, and lets you set the next suit.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>No point-scoring across multiple hands &mdash; the game ends the moment someone empties their hand.</li>
+                  <li>No special-action cards besides the wild 8 (no skip/reverse/draw-two).</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="president" role="tabpanel" aria-labelledby="president-tab">
+        <header class="game-header">
+          <h2 class="game-title">👑 President</h2>
+          <p class="game-description">Climb the rank order to empty your hand first; 2 is the highest card, and finishing order names everyone from President to Bum.</p>
+        </header>
+
+        <div class="tab-content" id="pr-setup" role="tabpanel" aria-labelledby="pr-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="pr-setup-content">Setup</h3>
+            <div class="section-content" id="pr-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>President</strong>, then assign each seat as Human, AI, or Off (3-4 players).</li>
+                  <li>On your turn, click a card (or cards) in your hand to play them, or use Pass when lit up.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. President plays with <strong>3-4</strong> players.</li>
+                  <li><strong>Turn order</strong> runs clockwise from whoever leads.</li>
+                  <li>The log panel below the table lists the most recent plays.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>Each seat shows its name/tag, and once you're out, your <strong>finish place</strong>.</li>
+                  <li>The seat with a glowing border is the one currently acting.</li>
+                  <li>Your own hand is face up and clickable; every other seat is shown face down, count only.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="pr-gameplay" role="tabpanel" aria-labelledby="pr-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="pr-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="pr-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">How to Play</h4>
+                <p>Rank order runs low to high: 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, <strong>2</strong> &mdash; the 2 is the highest card in the game.</p>
+                <div class="card-row">
+                  <span class="card-chip black">3&clubs;</span><span class="card-chip black">7&clubs;</span><span class="card-chip black">J&clubs;</span><span class="card-chip black">A&clubs;</span><span class="card-chip black">2&clubs;</span>
+                  <span class="tile-label">Low &rarr; high (2 is highest)</span>
+                </div>
+                <ul>
+                  <li>All 52 cards are dealt out evenly; whoever holds the 3 of Clubs leads the first trick.</li>
+                  <li>To lead, play one or more cards of <strong>the same rank</strong> (a single, a pair, a triple, or all four) &mdash; you choose how many.</li>
+                  <li>Everyone after that must either play the <strong>same number of cards</strong> at a <strong>strictly higher rank</strong>, or pass.</li>
+                  <li>Once every other player still in the hand has passed in a row, the pile clears and whoever played last leads next with a fresh pile.</li>
+                  <li>As soon as your hand is empty you're done for the round &mdash; lower finishers keep playing until only one player is left holding cards.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="pr-scoring" role="tabpanel" aria-labelledby="pr-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="pr-scoring-content">Scoring</h3>
+            <div class="section-content" id="pr-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Finishing Order</h4>
+                <p>The game ranks everyone by the order they finished in &mdash; first out is <strong>President</strong>, last one holding cards is the <strong>Bum</strong>.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="pr-faq" role="tabpanel" aria-labelledby="pr-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="pr-faq-content">FAQ</h3>
+            <div class="section-content" id="pr-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Pile</div>
+                    <p>The set of cards currently in play that must be beaten or passed on.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>No jokers, and no card-exchange between the President and the Bum between rounds.</li>
+                  <li>No "8 clears the pile" or "revolution" house rules &mdash; just pure rank climbing.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="big-two" role="tabpanel" aria-labelledby="big-two-tab">
+        <header class="game-header">
+          <h2 class="game-title">2️⃣ Big Two</h2>
+          <p class="game-description">Like President with poker hands: play singles, pairs, triples, or 5-card poker combinations to empty your hand first.</p>
+        </header>
+
+        <div class="tab-content" id="bt-setup" role="tabpanel" aria-labelledby="bt-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bt-setup-content">Setup</h3>
+            <div class="section-content" id="bt-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>Big Two</strong>, then assign each of the 4 seats as Human or AI.</li>
+                  <li>On your turn, click a card (or cards) in your hand to play them, or use Pass when lit up.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. Big Two is always exactly <strong>4 players</strong>, 13 cards each.</li>
+                  <li><strong>Turn order</strong> runs clockwise from whoever won the previous pile.</li>
+                  <li>The log panel below the table lists the most recent plays.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>Each seat shows its name/tag, and once you're out, your finish place.</li>
+                  <li>The seat with a glowing border is the one currently acting.</li>
+                  <li>Your own hand is face up and clickable; every other seat is shown face down, count only.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bt-gameplay" role="tabpanel" aria-labelledby="bt-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bt-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="bt-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">How to Play</h4>
+                <p>Rank order is low to high: 3 through 10, J, Q, K, A, <strong>2</strong> &mdash; and suits break ties for singles and pairs, low to high: &diams; &clubs; &hearts; &spades;.</p>
+                <div class="card-row">
+                  <span class="card-chip red">3&diams;</span><span class="card-chip black">3&clubs;</span><span class="card-chip red">3&hearts;</span><span class="card-chip black">3&spades;</span>
+                  <span class="tile-label">Same rank, weakest &rarr; strongest suit</span>
+                </div>
+                <ul>
+                  <li>Whoever holds the 3 of Diamonds leads the first play, and every lead after that is whoever won the previous pile.</li>
+                  <li>A play is a <strong>single</strong>, a <strong>pair</strong>, a <strong>triple</strong>, or a <strong>5-card poker hand</strong> (straight, flush, full house, four-of-a-kind, or straight flush). Any other size is illegal.</li>
+                  <li>To beat the pile you must play the <strong>same number of cards</strong> in a <strong>stronger</strong> combination of the same shape &mdash; a 5-card play can only be beaten by another 5-card play, ranked by poker strength.</li>
+                  <li>Once everyone else still in the hand has passed in a row, the pile clears and the last player to play leads next.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bt-scoring" role="tabpanel" aria-labelledby="bt-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bt-scoring-content">Scoring</h3>
+            <div class="section-content" id="bt-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">5-card Hand Strength</h4>
+                <div class="table-wrap">
+                  <table class="ref-table">
+                    <thead><tr><th>Rank (weakest to strongest)</th><th>Combination</th><th>Example</th></tr></thead>
+                    <tbody>
+                  <tr><td>1</td><td>Straight</td><td><span class="card-chip black">3&clubs;</span><span class="card-chip red">4&diams;</span><span class="card-chip red">5&hearts;</span><span class="card-chip black">6&clubs;</span><span class="card-chip black">7&spades;</span></td></tr>
+                  <tr><td>2</td><td>Flush</td><td><span class="card-chip black">2&spades;</span><span class="card-chip black">5&spades;</span><span class="card-chip black">9&spades;</span><span class="card-chip black">J&spades;</span><span class="card-chip black">K&spades;</span></td></tr>
+                  <tr><td>3</td><td>Full House</td><td><span class="card-chip red">7&hearts;</span><span class="card-chip red">7&diams;</span><span class="card-chip black">7&spades;</span><span class="card-chip black">K&clubs;</span><span class="card-chip red">K&diams;</span></td></tr>
+                  <tr><td>4</td><td>Four-of-a-kind</td><td><span class="card-chip black">9&spades;</span><span class="card-chip red">9&hearts;</span><span class="card-chip red">9&diams;</span><span class="card-chip black">9&clubs;</span><span class="card-chip black">2&clubs;</span></td></tr>
+                  <tr><td>5</td><td>Straight Flush</td><td><span class="card-chip red">5&diams;</span><span class="card-chip red">6&diams;</span><span class="card-chip red">7&diams;</span><span class="card-chip red">8&diams;</span><span class="card-chip red">9&diams;</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>Ranked by finishing order, same as President.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bt-faq" role="tabpanel" aria-labelledby="bt-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bt-faq-content">FAQ</h3>
+            <div class="section-content" id="bt-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Combo</div>
+                    <p>A legal play shape &mdash; single, pair, triple, or 5-card poker hand.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>Only singles, pairs, triples, and 5-card poker hands are legal plays &mdash; no other combo sizes.</li>
+                  <li>5-card hands rank straight &lt; flush &lt; full house &lt; four-of-a-kind &lt; straight flush, a common but not universal house convention.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="chinese-poker" role="tabpanel" aria-labelledby="chinese-poker-tab">
+        <header class="game-header">
+          <h2 class="game-title">🎴 Chinese Poker</h2>
+          <p class="game-description">Arrange 13 cards into Front, Middle, and Back poker hands, then compare row-for-row against 3 opponents at once.</p>
+        </header>
+
+        <div class="tab-content" id="cp-setup" role="tabpanel" aria-labelledby="cp-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cp-setup-content">Setup</h3>
+            <div class="section-content" id="cp-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>Chinese Poker</strong>, then assign each of the 4 seats as Human or AI.</li>
+                  <li>Click a card in your hand to cycle it between your Front/Middle/Back rows, then submit when ready.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. Chinese Poker is always exactly <strong>4 players</strong>, 13 cards each.</li>
+                  <li>There is no turn order &mdash; everyone arranges privately at the same time.</li>
+                  <li>The log panel below the table lists the most recent plays.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>A small badge on each card shows which row (Front/Middle/Back) it's currently assigned to.</li>
+                  <li>Your own hand is face up and clickable; every other seat is shown face down until everyone submits.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cp-gameplay" role="tabpanel" aria-labelledby="cp-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cp-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="cp-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">How to Play</h4>
+                <p>Split your 13 cards into a <strong>Front</strong> (3 cards), <strong>Middle</strong> (5 cards), and <strong>Back</strong> (5 cards) hand.</p>
+                <div class="card-row">
+                  <span class="card-chip black">4&clubs;</span><span class="card-chip red">4&diams;</span><span class="card-chip black">9&spades;</span>
+                  <span class="tile-label">Front (3, weakest allowed)</span>
+                </div>
+                <div class="card-row">
+                  <span class="card-chip black">8&clubs;</span><span class="card-chip red">8&hearts;</span><span class="card-chip black">8&spades;</span><span class="card-chip black">K&clubs;</span><span class="card-chip red">K&diams;</span>
+                  <span class="tile-label">Middle (5, full house)</span>
+                </div>
+                <div class="card-row">
+                  <span class="card-chip black">9&spades;</span><span class="card-chip red">9&hearts;</span><span class="card-chip red">9&diams;</span><span class="card-chip black">9&clubs;</span><span class="card-chip red">2&hearts;</span>
+                  <span class="tile-label">Back (5, four-of-a-kind &mdash; strongest of the three)</span>
+                </div>
+                <ul>
+                  <li>Your hands must not get <em>weaker</em> going up the rows: Front &le; Middle &le; Back in poker strength. Front hands only recognize high card, pair, or trips (a 3-card hand can't make a straight or flush).</li>
+                  <li>Once you submit, your rows are locked. If your rows are out of order, your whole hand is <strong>fouled</strong> and auto-loses all 3 rows to everyone.</li>
+                  <li>When all 4 players have submitted, every pair of players compares Front vs Front, Middle vs Middle, and Back vs Back.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cp-scoring" role="tabpanel" aria-labelledby="cp-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cp-scoring-content">Scoring</h3>
+            <div class="section-content" id="cp-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Scoring</h4>
+                <p>1 point for each row you win, -1 for each you lose, across all 6 pairings &mdash; 18 row comparisons total per round. Ranked by total points after the single round.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cp-faq" role="tabpanel" aria-labelledby="cp-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="cp-faq-content">FAQ</h3>
+            <div class="section-content" id="cp-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Foul</div>
+                    <p>A hand whose Front/Middle/Back rows aren't in ascending strength &mdash; auto-loses all 3 rows.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>Single round per game (no multi-round match, no running score across deals).</li>
+                  <li>No royalty/bonus points for strong hands &mdash; every row win is worth exactly 1 point.</li>
+                  <li>A 3-card Front hand only recognizes high card, pair, or trips.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </article>
+      <article class="game-content" id="blackjack" role="tabpanel" aria-labelledby="blackjack-tab">
+        <header class="game-header">
+          <h2 class="game-title">🎰 Blackjack</h2>
+          <p class="game-description">Get closer to 21 than the dealer without going over. You play against the dealer, not the other seats.</p>
+        </header>
+
+        <div class="tab-content" id="bj-setup" role="tabpanel" aria-labelledby="bj-setup-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bj-setup-content">Setup</h3>
+            <div class="section-content" id="bj-setup-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Quick Start</h4>
+                <ol>
+                  <li>Pick <strong>Blackjack</strong>, then assign 1-4 seats as Human or AI &mdash; everyone plays against the dealer.</li>
+                  <li>On your turn, use Hit / Stand / Double Down when lit up.</li>
+                  <li>In hot-seat mode, a "Pass the device" screen appears between turns.</li>
+                </ol>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Universal Basics</h4>
+                <ul>
+                  <li>One 52-card deck, no jokers. Blackjack plays with <strong>1-4</strong> players, everyone against the dealer rather than each other.</li>
+                  <li>The log panel below the table lists the most recent plays.</li>
+                </ul>
+
+              </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Reading the Table</h4>
+                <ul>
+                  <li>Each seat shows its hand total; the dealer's second card stays face-down until everyone's done.</li>
+                  <li>The seat with a glowing border is the one currently acting.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bj-gameplay" role="tabpanel" aria-labelledby="bj-gameplay-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bj-gameplay-content">Gameplay</h3>
+            <div class="section-content" id="bj-gameplay-content">
+              <div class="subsection">
+                <h4 class="subsection-title">How to Play</h4>
+                <ul>
+                  <li>1-4 players, each dealt 2 cards against the dealer's 2. Number cards count face value, J/Q/K count 10, and an Ace counts 11 or 1 &mdash; whichever keeps your hand at or under 21.</li>
+                  <li>On your turn: <strong>Hit</strong> (take another card), <strong>Stand</strong> (keep your total), or &mdash; on your first two cards only, if you can cover the extra bet &mdash; <strong>Double Down</strong> (double your bet, take exactly one more card, then automatically stand).</li>
+                  <li>Going over 21 is an automatic loss (a <strong>bust</strong>), regardless of what the dealer ends up with.</li>
+                  <li>Once every seat has finished, the dealer flips their hole card and must keep hitting until reaching 17 or more, then stops &mdash; "standing on all 17s."</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bj-scoring" role="tabpanel" aria-labelledby="bj-scoring-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bj-scoring-content">Scoring</h3>
+            <div class="section-content" id="bj-scoring-content">
+              <div class="subsection">
+                <h4 class="subsection-title">Payouts</h4>
+                <p>A 2-card 21 is a <strong>natural blackjack</strong> and pays 1.5x your bet, unless the dealer also has one (a push &mdash; bet returned). Otherwise, closer-to-21-without-busting wins your bet back plus that much again; a tie with the dealer pushes.</p>
+                <div class="card-row">
+                  <span class="card-chip black">A&spades;</span><span class="card-chip red">K&hearts;</span>
+                  <span class="tile-label">Natural blackjack (21, pays 1.5x)</span>
+                </div>
+                <div class="card-row">
+                  <span class="card-chip black">10&clubs;</span><span class="card-chip red">8&diams;</span><span class="card-chip red">5&hearts;</span>
+                  <span class="tile-label">Bust (23, automatic loss)</span>
+                </div>
+              <div class="highlight">
+                Every hand bets a flat 25 chips. The session runs a fixed 15 rounds, then ends &mdash; ranked by final chip count.
+              </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="bj-faq" role="tabpanel" aria-labelledby="bj-faq-tab">
+          <div class="section">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="bj-faq-content">FAQ</h3>
+            <div class="section-content" id="bj-faq-content">
+                <div class="card-list">
+                  <div class="card">
+                    <div class="card-name">Natural / Blackjack</div>
+                    <p>A 2-card total of 21 (an Ace plus a 10-value card) &mdash; pays 1.5x unless the dealer also has one.</p>
+                  </div>
+                  <div class="card">
+                    <div class="card-name">Bust</div>
+                    <p>A hand total over 21 &mdash; an automatic loss regardless of the dealer's hand.</p>
+                  </div>
+                </div>
+              <div class="subsection">
+                <h4 class="subsection-title">Known Simplifications</h4>
+                <ul>
+                  <li>Flat 25-chip bet every round, no betting UI.</li>
+                  <li>Hit, Stand, and Double Down only &mdash; no splitting pairs, no surrender, no insurance.</li>
+                  <li>Dealer always stands on all 17s (including a soft 17). Fixed 15-round session rather than playing until you're out of chips.</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </article>
         </div>
       </div>

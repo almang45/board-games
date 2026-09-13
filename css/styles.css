@@ -23,6 +23,12 @@
   --card-face: #fffdf7;
   --card-border: #a8916d;
   --card-accent: #8a5a2b;
+  /* Solid (non-translucent) surfaces for the search overlay: it sits on
+     top of arbitrary page content, so it needs real contrast rather than
+     the see-through panel look used elsewhere. */
+  --overlay-bg: #f5ecd8;
+  --overlay-item-bg: #fffdf5;
+  --overlay-item-hover: #f0e4c8;
 }
 
 [data-theme="dark"] {
@@ -45,6 +51,9 @@
   --card-face: #fdf8ee;
   --card-border: #8a7452;
   --card-accent: #8a5a2b;
+  --overlay-bg: #0d2e22;
+  --overlay-item-bg: #143a2c;
+  --overlay-item-hover: #1c4a38;
 }
 
 * {
@@ -296,6 +305,108 @@ h1 {
   margin-top: 15px;
 }
 
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.95em;
+}
+
+.ref-table th,
+.ref-table td {
+  text-align: left;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+}
+
+.ref-table th {
+  background: var(--bg-tertiary);
+  color: var(--text-accent);
+}
+
+.ref-table td:first-child {
+  font-weight: 600;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.table-wrap .ref-table {
+  margin: 0;
+}
+
+/* Tile/card face colors are theme-invariant, same reasoning as .card:
+   real tiles and cards don't change color with the table they're on. */
+.tile-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 2px;
+  background: var(--card-face);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  font-size: 1.6em;
+  line-height: 1;
+  color: #2b2016;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.tile-row .tile-label {
+  margin-left: 8px;
+  color: var(--text-secondary);
+  font-size: 0.95em;
+}
+
+.card-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  min-width: 28px;
+  padding: 3px 6px;
+  margin: 2px;
+  background: var(--card-face);
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1.05em;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.card-chip.red {
+  color: #b5342a;
+}
+
+.card-chip.black {
+  color: #2b2016;
+}
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0;
+}
+
+.card-row .tile-label {
+  margin-left: 8px;
+  color: var(--text-secondary);
+  font-size: 0.95em;
+}
+
 /* Styled like an actual playing card: a fixed cream face and tan border that
    don't shift with the light/dark toggle, the way real cardstock wouldn't. */
 .card {
@@ -357,7 +468,7 @@ h1 {
   top: 20px;
   right: 20px;
   z-index: 20;
-  background: var(--bg-secondary);
+  background: var(--overlay-bg);
   border: 1px solid var(--border-color);
   padding: 15px;
   border-radius: 12px;
@@ -373,6 +484,23 @@ h1 {
 .quick-ref-title {
   font-weight: bold;
   margin-bottom: 10px;
+  color: var(--text-accent);
+}
+
+.quick-ref-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.4em;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.quick-ref-close:hover {
   color: var(--text-accent);
 }
 
@@ -419,12 +547,12 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  background: var(--overlay-item-bg);
   transition: all 0.2s ease;
 }
 
 .search-result-item:hover {
-  background: var(--bg-tertiary);
+  background: var(--overlay-item-hover);
   transform: translateX(2px);
 }
 
@@ -449,7 +577,7 @@ h1 {
 }
 
 .search-filter {
-  background: var(--bg-tertiary);
+  background: var(--overlay-item-bg);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   padding: 5px 12px;

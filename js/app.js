@@ -219,6 +219,26 @@ searchBox.addEventListener('input', (e) => {
   }
 });
 
+// Closing the search results: an explicit close button, Escape, or a click
+// outside the panel/search box all dismiss it without touching the query.
+document.getElementById('quickRefClose').addEventListener('click', () => {
+  quickRef.classList.remove('show');
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && quickRef.classList.contains('show')) {
+    quickRef.classList.remove('show');
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (quickRef.classList.contains('show') &&
+      !quickRef.contains(e.target) &&
+      e.target !== searchBox) {
+    quickRef.classList.remove('show');
+  }
+});
+
 let searchFilters = { game: 'all', type: 'all' };
 let lastSearchResults = [];
 
@@ -229,12 +249,14 @@ function escapeRegExp(str) {
 function performSearch(searchTerm) {
   const results = [];
 
-  // Different types of content to search
+  // Different types of content to search. 'rules' and 'faq' both look at
+  // .subsection content, so they're split by tab id (*-faq vs everything
+  // else) rather than by selector, to avoid double-counting every match.
   const searchableElements = {
-    'rules': '.subsection p, .subsection li, .subsection-title',
+    'rules': '.tab-content:not([id$="-faq"]) .subsection p, .tab-content:not([id$="-faq"]) .subsection li, .tab-content:not([id$="-faq"]) .subsection-title',
     'cards': '.card-name, .card p',
     'scenarios': '.scenario-box p, .scenario-title',
-    'faq': '.subsection p, .subsection li'
+    'faq': '.tab-content[id$="-faq"] .subsection p, .tab-content[id$="-faq"] .subsection li'
   };
 
   Object.keys(searchableElements).forEach(type => {
@@ -413,31 +435,26 @@ document.addEventListener('click', (e) => {
 // Initialize first game tabs
 resetTabsForGame('unstable-unicorns');
 
-// URL hash routing for deep linking
+// URL hash routing for deep linking. Matched against the actual data-game/
+// data-tab attributes present in the DOM rather than assumed word counts,
+// since game ids are not all two hyphenated words (e.g. "hearts").
 function handleRouting() {
   const hash = window.location.hash.substr(1); // Remove the # symbol
   if (!hash) return;
 
-  const parts = hash.split('-');
-  if (parts.length >= 2) {
-    const gameId = parts[0] + '-' + parts[1]; // e.g., "unstable-unicorns"
-    const tabId = parts[2] ? hash : null; // e.g., "unstable-unicorns-setup"
-
-    // Switch to the correct game
-    const gameButton = document.querySelector(`[data-game="${gameId}"]`);
+  const tabButton = document.querySelector(`.tab-button[data-tab="${hash}"]`);
+  if (tabButton) {
+    const gameButton = document.querySelector(`.game-button[data-game="${tabButton.dataset.game}"]`);
     if (gameButton) {
       gameButton.click();
-
-      // Switch to the correct tab if specified
-      if (tabId && parts.length >= 3) {
-        setTimeout(() => {
-          const tabButton = document.querySelector(`[data-tab="${tabId}"]`);
-          if (tabButton) {
-            tabButton.click();
-          }
-        }, 100); // Small delay to ensure game content is loaded
-      }
+      setTimeout(() => tabButton.click(), 100); // Small delay to ensure game content is loaded
     }
+    return;
+  }
+
+  const gameButton = document.querySelector(`.game-button[data-game="${hash}"]`);
+  if (gameButton) {
+    gameButton.click();
   }
 }
 
