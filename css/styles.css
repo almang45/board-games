@@ -1,0 +1,634 @@
+/* Palette matches the shared "felt table" look used across the sibling
+   mahjong-table / card-games projects (--bg/--panel/--ink/--accent/--felt-line
+   naming), reskinned as light/dark theme pairs since this site (unlike those)
+   ships a light/dark toggle. Card face colors are theme-invariant on purpose:
+   real playing cards don't change color with the table they're on. */
+:root {
+  --bg-primary: linear-gradient(135deg, #d4a843 0%, #8b5e34 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.6);
+  --bg-tertiary: rgba(255, 255, 255, 0.85);
+  --text-primary: #2b2016;
+  --text-secondary: #6b5c47;
+  --text-accent: #b8860b;
+  --text-white: #fffaf0;
+  --border-color: rgba(43, 32, 22, 0.15);
+  --shadow: rgba(0, 0, 0, 0.12);
+  --shadow-hover: rgba(0, 0, 0, 0.18);
+  --highlight-bg: rgba(184, 134, 11, 0.12);
+  --highlight-border: rgba(184, 134, 11, 0.35);
+  --warning-bg: rgba(178, 34, 34, 0.1);
+  --warning-border: rgba(178, 34, 34, 0.3);
+  --scenario-bg: rgba(255, 255, 255, 0.5);
+  --scenario-border: rgba(43, 32, 22, 0.12);
+  --card-face: #fffdf7;
+  --card-border: #a8916d;
+  --card-accent: #8a5a2b;
+}
+
+[data-theme="dark"] {
+  --bg-primary: linear-gradient(135deg, #0f3d2e 0%, #0a2e22 100%);
+  --bg-secondary: rgba(0, 0, 0, 0.25);
+  --bg-tertiary: rgba(0, 0, 0, 0.4);
+  --text-primary: #f3ead9;
+  --text-secondary: #cfc3ac;
+  --text-accent: #ffd166;
+  --text-white: #f3ead9;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-hover: rgba(0, 0, 0, 0.6);
+  --highlight-bg: rgba(255, 209, 102, 0.14);
+  --highlight-border: rgba(255, 209, 102, 0.35);
+  --warning-bg: rgba(120, 40, 45, 0.22);
+  --warning-border: rgba(150, 60, 60, 0.4);
+  --scenario-bg: rgba(0, 0, 0, 0.25);
+  --scenario-border: rgba(255, 255, 255, 0.1);
+  --card-face: #fdf8ee;
+  --card-border: #8a7452;
+  --card-accent: #8a5a2b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-white);
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-tertiary);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.subtitle {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+/* Left sidebar TOC: one game per group, its tabs nested as sub-links,
+   matching the sticky guide-toc pattern used by the sibling
+   mahjong-table/card-games rules guides. */
+.guide-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.guide-toc {
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.toc-game + .toc-game {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.guide-content {
+  min-width: 0;
+}
+
+.game-button {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.05em;
+  font-weight: bold;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.game-button:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+.game-button:hover {
+  background: var(--bg-tertiary);
+}
+
+.game-button.active {
+  background: var(--text-accent);
+  color: var(--text-white);
+}
+
+.game-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px var(--shadow);
+  display: none;
+}
+
+.game-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 3px solid var(--text-accent);
+  padding-bottom: 20px;
+}
+
+.game-title {
+  font-size: 2.5em;
+  color: var(--text-accent);
+  margin-bottom: 10px;
+}
+
+.game-description {
+  font-size: 1.1em;
+  color: var(--text-secondary);
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.8em;
+  color: var(--text-accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.section-title:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  background-color: var(--bg-tertiary);
+}
+
+.section-title:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.section-title::before {
+  content: "▼";
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.section-title.collapsed::before {
+  transform: rotate(-90deg);
+}
+
+.section-content ol,
+.section-content ul {
+  padding-left: 22px;
+  margin: 6px 0 12px;
+}
+
+.section-content li {
+  margin-bottom: 4px;
+}
+
+.section-content li::marker {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.section-content {
+  margin-left: 20px;
+  transition: all 0.3s ease;
+}
+
+.section-content.collapsed {
+  display: none;
+}
+
+.subsection {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: var(--bg-tertiary);
+  border-left: 4px solid var(--text-accent);
+  border-radius: 12px;
+}
+
+.subsection-title {
+  font-size: 1.3em;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Styled like an actual playing card: a fixed cream face and tan border that
+   don't shift with the light/dark toggle, the way real cardstock wouldn't. */
+.card {
+  background: var(--card-face);
+  color: var(--card-accent);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.card p {
+  color: #2b2016;
+}
+
+.card:hover {
+  box-shadow: 0 4px 15px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.card-name {
+  font-weight: bold;
+  color: var(--card-accent);
+  margin-bottom: 8px;
+}
+
+.scenario-box {
+  background: var(--scenario-bg);
+  border: 1px solid var(--scenario-border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.scenario-title {
+  font-weight: bold;
+  color: var(--text-accent);
+  margin-bottom: 10px;
+}
+
+.highlight {
+  background: var(--highlight-bg);
+  border: 1px solid var(--highlight-border);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.warning {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.quick-reference {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow);
+  max-width: 300px;
+  display: none;
+}
+
+.quick-reference.show {
+  display: block;
+}
+
+.quick-ref-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--text-accent);
+}
+
+.search-box {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 25px;
+  font-size: 1em;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.search-box:focus {
+  border-color: var(--text-accent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.search-highlight {
+  background: var(--text-accent);
+  color: #2b2016;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.search-result-item {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+  background: var(--bg-tertiary);
+  transform: translateX(2px);
+}
+
+.search-result-game {
+  font-size: 0.8em;
+  color: var(--text-accent);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.search-result-text {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.search-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.search-filter {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 5px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: all 0.2s ease;
+}
+
+.search-filter.active {
+  background: var(--text-accent);
+  color: var(--text-white);
+}
+
+.search-stats {
+  font-size: 0.8em;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .theme-toggle,
+  .search-container,
+  .guide-toc,
+  .quick-reference {
+    display: none !important;
+  }
+
+  .game-content {
+    display: block !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 20px 0 !important;
+  }
+
+  .game-content:not(.active) {
+    display: block !important;
+  }
+
+  .tab-content {
+    display: block !important;
+  }
+
+  .section-content.collapsed {
+    display: block !important;
+  }
+
+  .section-title::before {
+    display: none !important;
+  }
+
+  .section-title {
+    cursor: default !important;
+    padding: 0 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .game-header {
+    border-bottom: 2px solid black !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+  }
+
+  .scenario-box,
+  .subsection,
+  .card,
+  .highlight,
+  .warning {
+    border: 1px solid #ccc !important;
+    background: white !important;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+
+  .card-list {
+    display: block !important;
+  }
+
+  .card {
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .guide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-toc {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .quick-reference {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .theme-toggle {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.toc-tabs {
+  display: none;
+  flex-direction: column;
+  margin: 2px 0 6px 10px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-color);
+}
+
+.toc-game.active .toc-tabs {
+  display: flex;
+}
+
+.tab-button {
+  text-align: left;
+  padding: 7px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tab-button:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+.tab-button:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.tab-button.active {
+  background: var(--highlight-bg);
+  color: var(--text-accent);
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
