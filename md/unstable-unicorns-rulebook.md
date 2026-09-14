@@ -25,9 +25,6 @@ A strategic card game about your two favorite things: Destruction & Unicorns!
     * Baby Unicorn Cards
 * Chain Order
 * Specific Card Interactions
-* Optional Rules
-    * Party Leader
-    * Challenge Rules
 * Frequently Asked Questions
 
 ---
@@ -187,23 +184,6 @@ The Chain resolves as follows:
 ## Specific Card Interactions
 
 Some cards have unique effects that might seem to contradict the general rules. In such cases, the specific card's text takes precedence.
-
----
-
-## Optional Rules
-
-### Party Leader
-
-* Before the game starts, each player chooses a Party Leader card and places it face-up in front of them.
-* Each Party Leader has a unique effect that is active throughout the game.
-* If you have a Party Leader, you collect one fewer Unicorn to win the game.
-
-### Challenge Rules
-
-* **Challenging a Play:** When another player plays a Unicorn, Upgrade, Downgrade, or Magic card, you can play an Instant card to "Challenge" their play.
-* **If the Challenge succeeds:** The played card is immediately moved to the Discard Pile and its effect does not resolve.
-* **If the Challenge fails:** The played card's effect resolves as normal.
-* **Challenging an Instant:** You cannot Challenge the playing of an Instant card.
 
 ---
 

@@ -156,8 +156,8 @@
 
         <div class="tab-content active" id="uu-setup" role="tabpanel" aria-labelledby="uu-setup-tab">
           <div class="section">
-            <h3 class="section-title">Game Setup</h3>
-            <div class="section-content">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="uu-setup-content">Game Setup</h3>
+            <div class="section-content" id="uu-setup-content">
               <div class="subsection">
                 <h4 class="subsection-title">Initial Setup</h4>
                 <p><strong>Players:</strong> 2-8 players</p>
@@ -213,8 +213,8 @@
 
         <div class="tab-content" id="uu-gameplay" role="tabpanel" aria-labelledby="uu-gameplay-tab">
           <div class="section">
-            <h3 class="section-title">Turn Structure</h3>
-            <div class="section-content">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="uu-gameplay-content">Turn Structure</h3>
+            <div class="section-content" id="uu-gameplay-content">
               <div class="subsection">
                 <h4 class="subsection-title">Official Turn Phases (4 Phases)</h4>
                 <p>Turns go clockwise around the table, and each turn has 4 phases:</p>
@@ -273,8 +273,8 @@
 
         <div class="tab-content" id="uu-cards" role="tabpanel" aria-labelledby="uu-cards-tab">
           <div class="section">
-            <h3 class="section-title">Card Types</h3>
-            <div class="section-content">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="uu-cards-content">Card Types</h3>
+            <div class="section-content" id="uu-cards-content">
               <div class="card-list">
                 <div class="card">
                   <div class="card-name">Baby Unicorn Cards</div>
@@ -332,8 +332,8 @@
 
         <div class="tab-content" id="uu-scenarios" role="tabpanel" aria-labelledby="uu-scenarios-tab">
           <div class="section">
-            <h3 class="section-title">Common Scenarios</h3>
-            <div class="section-content">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="uu-scenarios-content">Common Scenarios</h3>
+            <div class="section-content" id="uu-scenarios-content">
               <div class="scenario-box">
                 <div class="scenario-title">Scenario 1: Multiple Effects Trigger</div>
                 <p><strong>Situation:</strong> You play a card that triggers multiple "when you play" effects.</p>
@@ -361,9 +361,9 @@
 
               <div class="scenario-box">
                 <div class="scenario-title">Scenario 4: Winning with Effects</div>
-                <p><strong>Situation:</strong> You have 6 Unicorns and play a card that brings a Unicorn to your Stable.
+                <p><strong>Situation:</strong> You're one Unicorn short of winning and play a card that brings a Unicorn to your Stable.
                 </p>
-                <p><strong>Resolution:</strong> You win immediately when you reach 7 Unicorns, even mid-effect.</p>
+                <p><strong>Resolution:</strong> You win immediately when you reach the required number of Unicorns (7, or 6 with 6-8 players), even mid-effect.</p>
               </div>
 
               <div class="scenario-box">
@@ -377,8 +377,8 @@
 
         <div class="tab-content" id="uu-faq" role="tabpanel" aria-labelledby="uu-faq-tab">
           <div class="section">
-            <h3 class="section-title">Official FAQ</h3>
-            <div class="section-content">
+            <h3 class="section-title" tabindex="0" role="button" aria-expanded="true" aria-controls="uu-faq-content">Official FAQ</h3>
+            <div class="section-content" id="uu-faq-content">
               <div class="subsection">
                 <h4 class="subsection-title">Hand Limit Rules</h4>
                 <p><strong>Official Rule:</strong> If you're holding more than 7 cards at the end of your turn, discard
@@ -427,28 +427,6 @@
                 <p><strong>Official Rule:</strong> Some cards have unique effects that might seem to contradict the general rules. In such cases, the specific card's text takes precedence.</p>
               </div>
 
-              <div class="subsection">
-                <h4 class="subsection-title">Optional Rules</h4>
-                <div class="scenario-box">
-                  <div class="scenario-title">Party Leader</div>
-                  <ul>
-                    <li>Before the game starts, each player chooses a Party Leader card and places it face-up in front of them.</li>
-                    <li>Each Party Leader has a unique effect that is active throughout the game.</li>
-                    <li><strong>Important:</strong> If you have a Party Leader, you collect <strong>one fewer</strong> Unicorn to win the game.</li>
-                  </ul>
-                </div>
-                
-                <div class="scenario-box">
-                  <div class="scenario-title">Challenge Rules</div>
-                  <ul>
-                    <li><strong>Challenging a Play:</strong> When another player plays a Unicorn, Upgrade, Downgrade, or Magic card, you can play an Instant card to "Challenge" their play.</li>
-                    <li><strong>If the Challenge succeeds:</strong> The played card is immediately moved to the Discard Pile and its effect does not resolve.</li>
-                    <li><strong>If the Challenge fails:</strong> The played card's effect resolves as normal.</li>
-                    <li><strong>Challenging an Instant:</strong> You cannot Challenge the playing of an Instant card.</li>
-                  </ul>
-                </div>
-              </div>
-
               <div class="highlight">
                 <p><strong>Reference:</strong> Official rules based on the Unstable Unicorns Rulebook</p>
               </div>
@@ -477,7 +455,7 @@
 
               <h5>Setup Steps:</h5>
               <ol>
-                <li>Shuffle all 110 cards</li>
+                <li>Set aside the 4 quick-start reference cards and shuffle the remaining 106</li>
                 <li>Deal 5 cards to each player</li>
                 <li>Place remaining cards as Draw Pile</li>
                 <li>Players arrange their areas: Hand, Bank, Properties</li>
@@ -506,8 +484,8 @@
               <div class="subsection">
                 <h4 class="subsection-title">Turn Phases</h4>
               <ol>
-                <li><strong>Draw 2 Cards</strong> from the Draw Pile</li>
-                <li><strong>Play up to 3 Action Cards</strong>
+                <li><strong>Draw 2 Cards</strong> from the Draw Pile (5 if your hand is empty)</li>
+                <li><strong>Play up to 3 cards</strong>
                   <ul>
                     <li>Property cards</li>
                     <li>Money cards (to Bank)</li>
@@ -525,9 +503,9 @@
                 <li>You MUST draw 2 cards at start of turn (even if deck runs out)</li>
                 <li>You can play 0-3 cards per turn</li>
                 <li>Property Wild cards can be moved between color groups on your turn</li>
-                <li>Money in Bank cannot be taken by other players</li>
-                <li>All cards have a money value printed on them</li>
-                <li><strong>Empty Hand Rule:</strong> If you have 0 cards, you still draw 2 cards (not up to 2)</li>
+                <li>Money in your Bank can't be stolen by action cards &mdash; you only lose it when you use it to pay</li>
+                <li>Every card except the multicolor Property Wild has a money value; action cards can be banked as money, but property cards can never go in the Bank</li>
+                <li><strong>Empty Hand Rule:</strong> If you start your turn with no cards in hand, draw 5 cards instead of 2</li>
                 <li><strong>Draw Pile Empty:</strong> When draw pile is empty, shuffle discard pile to make new draw
                   pile</li>
               </ul>
@@ -561,12 +539,12 @@
 
                 <div class="card">
                   <div class="card-name">Rent Cards</div>
-                  <p><strong>Effect:</strong> Charge rent to specific players</p>
-                  <p><strong>Amount:</strong> Based on number of properties in set</p>
+                  <p><strong>Effect:</strong> Two-color Rent charges every other player for one of your sets in those colors; the multicolor Rent charges one player of your choice for any one set</p>
+                  <p><strong>Amount:</strong> Based on the number of properties in that set, plus any House or Hotel on it</p>
                 </div>
 
                 <div class="card">
-                  <div class="card-name">Birthday/Christmas</div>
+                  <div class="card-name">It's My Birthday</div>
                   <p><strong>Effect:</strong> All other players give you $2M</p>
                   <p><strong>Source:</strong> From their Bank or properties</p>
                 </div>
@@ -575,6 +553,12 @@
                   <div class="card-name">Debt Collector</div>
                   <p><strong>Effect:</strong> Choose one player to pay you $5M</p>
                   <p><strong>Targeting:</strong> Single opponent</p>
+                </div>
+
+                <div class="card">
+                  <div class="card-name">Pass Go</div>
+                  <p><strong>Effect:</strong> Draw 2 extra cards from the Draw Pile</p>
+                  <p><strong>Note:</strong> Counts as one of your 3 plays</p>
                 </div>
 
                 <div class="card">
@@ -593,6 +577,18 @@
                   <div class="card-name">Double the Rent</div>
                   <p><strong>Effect:</strong> Play with a rent card to double the rent amount</p>
                   <p><strong>Usage:</strong> Must be played together with a rent action card</p>
+                </div>
+
+                <div class="card">
+                  <div class="card-name">House</div>
+                  <p><strong>Effect:</strong> Add to a complete property set to raise its rent by $3M</p>
+                  <p><strong>Restriction:</strong> One per set; not on Railroads or Utilities</p>
+                </div>
+
+                <div class="card">
+                  <div class="card-name">Hotel</div>
+                  <p><strong>Effect:</strong> Add to a complete set that already has a House to raise its rent by another $4M</p>
+                  <p><strong>Restriction:</strong> One per set; not on Railroads or Utilities</p>
                 </div>
 
                 <div class="card">
@@ -622,11 +618,10 @@
                   combined.</p>
               <p><strong>Resolution:</strong></p>
               <ol>
-                <li>Pay all money from Bank first</li>
-                <li>Give ALL remaining properties (even if total value is less than owed)</li>
-                <li>You choose which properties to give</li>
+                <li>Give everything you have on the table: all your Bank money and all your properties</li>
+                <li>Cards in your hand can never be used to pay</li>
                 <li><strong>No credit/debt system:</strong> You don't owe anything more in future turns</li>
-                <li><strong>No change given:</strong> Overpayment is acceptable</li>
+                <li>If you have nothing on the table, you pay nothing</li>
               </ol>
               <div class="warning">
                 <strong>Key Rule:</strong> Players pay what they can. No debt carries over to future turns.
@@ -638,9 +633,9 @@
               <p><strong>Situation:</strong> You must pay $4M rent and have $2M in Bank plus properties.</p>
               <p><strong>Resolution:</strong></p>
               <ol>
-                <li>Pay all money from Bank first ($2M)</li>
-                <li>Give properties worth remaining amount ($2M)</li>
-                <li>You choose which properties to give</li>
+                <li>You choose how to pay: any mix of Bank money and properties on the table</li>
+                <li>For example, $2M from your Bank plus a $2M property, or a single $4M property</li>
+                <li>Money you pay goes into the receiver's Bank; properties go into their property area</li>
                 <li>Overpayment is acceptable (no change given)</li>
               </ol>
             </div>
@@ -666,7 +661,7 @@
                 Just Say No.</p>
               <p><strong>Resolution:</strong></p>
               <ol>
-                <li>Player A's second Just Say No cancels Player B's Just Say No</li>
+                <li>Player A's Just Say No cancels Player B's Just Say No</li>
                 <li>Original Sly Deal takes effect</li>
                 <li>Player B can play another Just Say No if they have one</li>
               </ol>
@@ -712,13 +707,14 @@
                 plays "Just Say No."</p>
               <p><strong>Resolution:</strong></p>
               <ol>
-                <li>Just Say No cancels the ENTIRE rent action (including the double effect)</li>
-                <li>Player A gets no rent payment</li>
+                <li>Just Say No cancels the ENTIRE rent charge against Player B (including the double effect)</li>
+                <li>Player A gets no rent from Player B</li>
                 <li>Both "Double the Rent" and "Rent" cards go to discard pile</li>
                 <li>Just Say No goes to discard pile</li>
+                <li>Just Say No only protects the player who plays it &mdash; if the Rent card charged every other player, the rest still pay</li>
               </ol>
               <div class="warning">
-                <strong>Key Rule:</strong> Just Say No cancels the complete action, not just part of it.
+                <strong>Key Rule:</strong> Just Say No cancels the complete action against you, not just part of it.
               </div>
             </div>
 
@@ -834,10 +830,9 @@
               <h5>Setup Steps:</h5>
               <ol>
                 <li>Remove all Exploding Kittens and Defuse cards from deck</li>
-                <li>Give each player 1 Defuse card</li>
-                <li>Shuffle remaining cards and deal 4 to each player (7 cards total with Defuse)</li>
+                <li>Give each player 1 Defuse card, then shuffle at most 2 of the leftover Defuses back into the deck (the base deck has 6, so with 5 players only 1 is left) and set any others aside</li>
+                <li>Deal 7 cards to each player, so everyone holds 8 including their Defuse</li>
                 <li>Add back Exploding Kittens: (Players - 1) Exploding Kittens</li>
-                <li>Add back remaining Defuse cards to deck</li>
                 <li>Shuffle and place as Draw Pile</li>
               </ol>
 
@@ -850,8 +845,8 @@
               <h4 class="subsection-title">Card Distribution (5 Players)</h4>
               <ul>
                 <li><strong>Exploding Kittens:</strong> 4 in deck</li>
-                <li><strong>Defuse Cards:</strong> 1 per player + 2 extras in deck</li>
-                <li><strong>Other Cards:</strong> Distributed equally</li>
+                <li><strong>Defuse Cards:</strong> 1 per player + 1 extra in deck (6 in the base deck)</li>
+                <li><strong>Other Cards:</strong> 7 dealt to each player; the rest form the Draw Pile</li>
               </ul>
             </div>
             </div>
@@ -882,7 +877,7 @@
                 <ul>
                   <li>You can play cards before drawing</li>
                   <li>You can play cards in response to other cards</li>
-                  <li>Some cards can be played out of turn</li>
+                  <li>Nope can be played at any time, even on other players' turns</li>
                   <li>Always end your turn by drawing a card</li>
                   <li>No hand limit</li>
                 </ul>
@@ -935,11 +930,11 @@
                 <div class="card">
                   <div class="card-name">Attack</div>
                   <p><strong>Effect:</strong> End your turn, next player takes 2 turns</p>
-                  <p><strong>Stacking:</strong> Can be played on Attack to pass 2 turns to next player</p>
+                  <p><strong>Stacking:</strong> If you're attacked and play your own Attack, your turns end and the next player takes your current and remaining turns plus 2 (usually 4)</p>
                 </div>
 
                 <div class="card">
-                  <div class="card-name">Targeted Attack</div>
+                  <div class="card-name">Targeted Attack (expansion)</div>
                   <p><strong>Effect:</strong> Choose any player to take 2 turns</p>
                   <p><strong>Targeting:</strong> Skip turn order, target specific player</p>
                 </div>
@@ -967,12 +962,13 @@
             <div class="section-content" id="ek-scenarios-content">
               <div class="scenario-box">
                 <div class="scenario-title">Scenario 1: Multiple Attacks</div>
-                <p><strong>Situation:</strong> Player A plays Attack, Player B plays Attack in response.</p>
+                <p><strong>Situation:</strong> Player A plays Attack, so Player B must take 2 turns. On their first turn, Player B plays an Attack of their own.</p>
                 <p><strong>Resolution:</strong></p>
                 <ol>
-                  <li>Player B's Attack cancels their 2 turns</li>
-                  <li>Player C (next after B) must take 2 turns</li>
-                  <li>Attacks can be chained indefinitely</li>
+                  <li>Player B's turns end immediately, without drawing</li>
+                  <li>Attacks stack: Player C (next after B) takes B's current and remaining turns plus 2 &mdash; 4 turns (3 if B had already finished one turn)</li>
+                  <li>Attacks can keep stacking: 4 turns, then 6, and so on</li>
+                  <li>Attack can't be played in response to another card &mdash; Nope is the only card you can play out of turn</li>
                 </ol>
             </div>
 
@@ -1141,7 +1137,7 @@
                 <h4 class="subsection-title">Reading the Table</h4>
                 <ul>
                   <li><strong>Wind badge:</strong> this seat's own seat wind, changing each hand as the deal rotates.</li>
-                  <li><strong>Dealer marker:</strong> shown only on the current dealer (East); the dealer's hand pays/wins double.</li>
+                  <li><strong>Dealer marker:</strong> shown only on the current dealer (East); a dealer win scores 1.5&times;, and the dealer pays double a non-dealer's share when someone else wins by tsumo.</li>
                   <li><strong>Riichi stick:</strong> appears once a seat has declared Riichi.</li>
                   <li><strong>Melds / Discards / Hand:</strong> called sets laid face-up, every tile thrown this hand in order, and your own concealed tiles (most recently drawn tile outlined).</li>
                   <li>The table center shows the round (e.g. "East 1"), honba count, tiles left in the wall, the riichi-stick pot, and the dora indicator once the hand starts.</li>
@@ -1242,10 +1238,10 @@
               </div>
               <div class="subsection">
                 <h4 class="subsection-title">Scoring reference</h4>
-                <p>Base points = fu &times; 2<sup>(2+han)</sup>, capped at the Mangan value, then fixed tiers take over at 5+ han. The dealer pays/receives 1.5&times; the non-dealer figures below, and on tsumo every other seat pays their own share (not split).</p>
+                <p>Base points = fu &times; 2<sup>(2+han)</sup>, capped at the Mangan value, then fixed tiers take over at 5+ han. The figures below are for a non-dealer win; a dealer win scores 1.5&times; (e.g. mangan: 12000 on ron, or 4000 from each seat on tsumo). On a non-dealer tsumo, the dealer pays the larger share shown.</p>
                 <div class="table-wrap">
                   <table class="ref-table">
-                    <thead><tr><th>Han / Fu</th><th>Ron (paid by discarder)</th><th>Tsumo (dealer / each non-dealer)</th></tr></thead>
+                    <thead><tr><th>Han / Fu</th><th>Ron (paid by discarder)</th><th>Tsumo (paid by dealer / by each non-dealer)</th></tr></thead>
                     <tbody>
                   <tr><td>1 han, 30 fu</td><td>1000</td><td>500 / 300</td></tr>
                   <tr><td>2 han, 30 fu</td><td>2000</td><td>1000 / 500</td></tr>
@@ -2069,8 +2065,8 @@
                 <h4 class="subsection-title">How to Play</h4>
                 <p>Split your 13 cards into a <strong>Front</strong> (3 cards), <strong>Middle</strong> (5 cards), and <strong>Back</strong> (5 cards) hand.</p>
                 <div class="card-row">
-                  <span class="card-chip black">4&clubs;</span><span class="card-chip red">4&diams;</span><span class="card-chip black">9&spades;</span>
-                  <span class="tile-label">Front (3, weakest allowed)</span>
+                  <span class="card-chip black">4&clubs;</span><span class="card-chip red">4&diams;</span><span class="card-chip black">J&spades;</span>
+                  <span class="tile-label">Front (3, pair of 4s &mdash; weakest row)</span>
                 </div>
                 <div class="card-row">
                   <span class="card-chip black">8&clubs;</span><span class="card-chip red">8&hearts;</span><span class="card-chip black">8&spades;</span><span class="card-chip black">K&clubs;</span><span class="card-chip red">K&diams;</span>

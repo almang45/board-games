@@ -174,9 +174,10 @@ h1 {
   background: var(--bg-tertiary);
 }
 
+/* Dark ink in both themes: cream text is unreadable on the dark theme's yellow accent. */
 .game-button.active {
   background: var(--text-accent);
-  color: var(--text-white);
+  color: #2b2016;
 }
 
 .game-content {
@@ -589,7 +590,7 @@ h1 {
 
 .search-filter.active {
   background: var(--text-accent);
-  color: var(--text-white);
+  color: #2b2016;
 }
 
 .search-stats {
