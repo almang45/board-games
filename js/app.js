@@ -186,20 +186,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Collapsible sections
+function setSectionCollapsed(title, collapsed) {
+  title.classList.toggle('collapsed', collapsed);
+  title.nextElementSibling.classList.toggle('collapsed', collapsed);
+  title.setAttribute('aria-expanded', String(!collapsed));
+}
+
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('section-title')) {
-    const sectionContent = e.target.nextElementSibling;
-    const isCollapsed = sectionContent.classList.contains('collapsed');
-
-    if (isCollapsed) {
-      sectionContent.classList.remove('collapsed');
-      e.target.classList.remove('collapsed');
-    } else {
-      sectionContent.classList.add('collapsed');
-      e.target.classList.add('collapsed');
-    }
-
-    // Save collapsed state
+    setSectionCollapsed(e.target, !e.target.classList.contains('collapsed'));
     saveCollapsedSections();
   }
 });
@@ -208,8 +203,8 @@ document.addEventListener('click', (e) => {
 const searchBox = document.getElementById('searchBox');
 const quickRef = document.getElementById('quickRef');
 
-searchBox.addEventListener('input', (e) => {
-  const searchTerm = e.target.value.toLowerCase();
+searchBox.addEventListener('input', () => {
+  const searchTerm = currentSearchTerm();
 
   if (searchTerm.length > 2) {
     performSearch(searchTerm);
@@ -241,57 +236,77 @@ document.addEventListener('click', (e) => {
 
 let searchFilters = { game: 'all', type: 'all' };
 let lastSearchResults = [];
+let searchIndex = null;
+
+const SNIPPET_LENGTH = 120;
+
+// A block nested in another (a <p> in a .highlight, a list in an <li>) is indexed on its own and cut out of its parent, so nothing is counted twice.
+const SEARCH_BLOCKS = 'p, li, td, h4, h5, .highlight, .warning, .card-name, .scenario-title, .tile-label';
+
+function currentSearchTerm() {
+  return searchBox.value.trim().replace(/\s+/g, ' ').toLowerCase();
+}
 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function escapeHTML(str) {
+  return str.replace(/[&<>"']/g, ch => `&#${ch.charCodeAt(0)};`);
+}
+
+function searchType(element) {
+  if (element.closest('.scenario-box')) return 'scenarios';
+  if (element.closest('.card')) return 'cards';
+  return element.closest('.tab-content[id$="-faq"]') ? 'faq' : 'rules';
+}
+
+function ownText(element) {
+  const clone = element.cloneNode(true);
+  clone.querySelectorAll(SEARCH_BLOCKS).forEach(nested => nested.remove());
+  return clone.textContent.replace(/\s+/g, ' ').trim();
+}
+
+// The guide is static, so it's indexed once on first search instead of re-walking the DOM on every keystroke.
+function buildSearchIndex() {
+  return [...document.querySelectorAll('.tab-content')].flatMap(tabContent =>
+    [...tabContent.querySelectorAll(SEARCH_BLOCKS)]
+      .map(element => {
+        const text = ownText(element);
+        return {
+          text,
+          lowerText: text.toLowerCase(),
+          type: searchType(element),
+          gameId: tabContent.closest('.game-content').id,
+          tabId: tabContent.id
+        };
+      })
+      .filter(entry => entry.text)
+  );
+}
+
 function performSearch(searchTerm) {
-  const results = [];
+  searchIndex ??= buildSearchIndex();
+  const matches = searchIndex.filter(entry => entry.lowerText.includes(searchTerm));
 
-  // Different types of content to search. 'rules' and 'faq' both look at
-  // .subsection content, so they're split by tab id (*-faq vs everything
-  // else) rather than by selector, to avoid double-counting every match.
-  const searchableElements = {
-    'rules': '.tab-content:not([id$="-faq"]) .subsection p, .tab-content:not([id$="-faq"]) .subsection li, .tab-content:not([id$="-faq"]) .subsection-title',
-    'cards': '.card-name, .card p',
-    'scenarios': '.scenario-box p, .scenario-title',
-    'faq': '.tab-content[id$="-faq"] .subsection p, .tab-content[id$="-faq"] .subsection li'
-  };
+  // A filter picked for an earlier query would otherwise silently hide every match of this one.
+  if (!matches.some(match => match.gameId === searchFilters.game)) searchFilters.game = 'all';
+  if (!matches.some(match => match.type === searchFilters.type)) searchFilters.type = 'all';
 
-  Object.keys(searchableElements).forEach(type => {
-    const elements = document.querySelectorAll(searchableElements[type]);
+  const results = matches
+    .filter(match => searchFilters.game === 'all' || match.gameId === searchFilters.game)
+    .filter(match => searchFilters.type === 'all' || match.type === searchFilters.type)
+    .map(match => ({
+      text: buildSnippet(match.text, searchTerm),
+      game: formatGameName(match.gameId),
+      tab: formatTabName(match.tabId),
+      type: match.type,
+      gameId: match.gameId,
+      tabId: match.tabId
+    }));
 
-    elements.forEach(element => {
-      if (element.textContent.toLowerCase().includes(searchTerm)) {
-        const gameContent = element.closest('.game-content');
-        const tabContent = element.closest('.tab-content');
-        const gameName = gameContent ? formatGameName(gameContent.id) : '';
-        const tabName = tabContent ? formatTabName(tabContent.id) : '';
-
-        // Apply filters
-        if (searchFilters.game !== 'all' && gameContent && gameContent.id !== searchFilters.game) {
-          return;
-        }
-
-        if (searchFilters.type !== 'all' && type !== searchFilters.type) {
-          return;
-        }
-
-        const highlightedText = highlightSearchTerm(element.textContent, searchTerm);
-
-        results.push({
-          text: truncateText(highlightedText, 120),
-          game: gameName,
-          tab: tabName,
-          type: type,
-          gameId: gameContent ? gameContent.id : null,
-          tabId: tabContent ? tabContent.id : null
-        });
-      }
-    });
-  });
-
+  // Chips come from the unfiltered matches, so picking one game doesn't hide the others.
+  generateSearchFilters(matches);
   displaySearchResults(results, searchTerm);
 }
 
@@ -307,14 +322,20 @@ function formatTabName(tabId) {
   return button ? button.textContent.trim() : tabId;
 }
 
-function highlightSearchTerm(text, term) {
-  const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
-  return text.replace(regex, '<span class="search-highlight">$1</span>');
+// The window is cut from plain text before any markup is added, so the match can't fall outside it or have its highlight tag sliced in half.
+function buildSnippet(text, term) {
+  const matchIndex = text.search(new RegExp(escapeRegExp(term), 'i'));
+  const start = Math.max(0, Math.min(matchIndex - 40, text.length - SNIPPET_LENGTH));
+  const end = start + SNIPPET_LENGTH;
+  return highlightSearchTerm((start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : ''), term);
 }
 
-function truncateText(text, maxLength) {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + '...';
+function highlightSearchTerm(text, term) {
+  // split() with a capturing group puts the matched parts at the odd indexes
+  return text
+    .split(new RegExp(`(${escapeRegExp(term)})`, 'gi'))
+    .map((part, i) => (i % 2 ? `<span class="search-highlight">${escapeHTML(part)}</span>` : escapeHTML(part)))
+    .join('');
 }
 
 function displaySearchResults(results, searchTerm) {
@@ -325,9 +346,6 @@ function displaySearchResults(results, searchTerm) {
 
   // Update stats (textContent, not innerHTML: searchTerm is untrusted user input)
   searchStats.textContent = `Found ${results.length} result(s) for "${searchTerm}"`;
-
-  // Generate filters
-  generateSearchFilters(results);
 
   if (results.length === 0) {
     quickRefContent.innerHTML = '<p>No results found. Try different keywords or check your filters.</p>';
@@ -383,8 +401,7 @@ function generateSearchFilters(results) {
 
 function setSearchFilter(filterType, value) {
   searchFilters[filterType] = value;
-  saveToStorage(STORAGE_KEYS.SEARCH_FILTERS, searchFilters);
-  const searchTerm = searchBox.value.toLowerCase();
+  const searchTerm = currentSearchTerm();
   if (searchTerm.length > 2) {
     performSearch(searchTerm);
   }
@@ -470,8 +487,7 @@ const STORAGE_KEYS = {
   LAST_GAME: 'boardgames_last_game',
   LAST_TAB: 'boardgames_last_tab',
   RECENT_SECTIONS: 'boardgames_recent_sections',
-  COLLAPSED_SECTIONS: 'boardgames_collapsed_sections',
-  SEARCH_FILTERS: 'boardgames_search_filters'
+  COLLAPSED_SECTIONS: 'boardgames_collapsed_sections'
 };
 
 function saveToStorage(key, value) {
@@ -512,27 +528,19 @@ function trackRecentSection(gameId, tabId) {
   saveToStorage(STORAGE_KEYS.RECENT_SECTIONS, limited);
 }
 
+// Keyed by the id of the content each title controls; the titles themselves have no ids.
 function restoreCollapsedSections() {
-  const collapsedSections = loadFromStorage(STORAGE_KEYS.COLLAPSED_SECTIONS, []);
-  collapsedSections.forEach(sectionId => {
-    const sectionTitle = document.getElementById(sectionId);
-    if (sectionTitle) {
-      const sectionContent = sectionTitle.nextElementSibling;
-      if (sectionContent) {
-        sectionContent.classList.add('collapsed');
-        sectionTitle.classList.add('collapsed');
-      }
+  loadFromStorage(STORAGE_KEYS.COLLAPSED_SECTIONS, []).forEach(contentId => {
+    const sectionContent = document.getElementById(contentId);
+    if (sectionContent) {
+      setSectionCollapsed(sectionContent.previousElementSibling, true);
     }
   });
 }
 
 function saveCollapsedSections() {
-  const collapsedSections = [];
-  document.querySelectorAll('.section-title.collapsed').forEach(title => {
-    if (title.id) {
-      collapsedSections.push(title.id);
-    }
-  });
+  const collapsedSections = [...document.querySelectorAll('.section-title.collapsed')]
+    .map(title => title.getAttribute('aria-controls'));
   saveToStorage(STORAGE_KEYS.COLLAPSED_SECTIONS, collapsedSections);
 }
 
@@ -559,9 +567,6 @@ function loadLastVisited() {
   }
 }
 
-// Load saved preferences
-searchFilters = loadFromStorage(STORAGE_KEYS.SEARCH_FILTERS, { game: 'all', type: 'all' });
-
 // Load saved theme
 loadTheme();
 
@@ -572,8 +577,7 @@ if (window.location.hash) {
   loadLastVisited();
 }
 
-// Restore collapsed sections after a short delay
-setTimeout(restoreCollapsedSections, 200);
+restoreCollapsedSections();
 
 // Listen for hash changes
 window.addEventListener('hashchange', handleRouting);
